@@ -369,6 +369,8 @@ return[['dash','Dashboard','home'],...(p==='loans'?l:v),...c]}
 function paintNav(){const nv=document.querySelector('.nv');if(nv)nv.innerHTML=navItems().map(n=>`<button data-t="${n[0]}">${ic(n[2])}<span>${n[1]}</span></button>`).join('');const sw=document.getElementById('psw');if(sw)sw.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.p===S.panel))}
 const V={dash:vDash,search:vSearch,all:vAll,loans:vLoans,live:vLive,staff:vStaff,imp:vImp,limp:vLimp,db:vDb,act:vAct};
 function go(t){if(LIVE){LIVE();LIVE=null}S.tab=t;if(PANEL_OF[t]&&PANEL_OF[t]!==S.panel){S.panel=PANEL_OF[t];paintNav()}document.querySelectorAll('.nv button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));V[t]().then(()=>animNums()).catch(E)}
+/* numbers count up when a screen opens (hero total, dashboard stats) */
+function animNums(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;document.querySelectorAll('.hero b,.stat b,.kpi b').forEach(el=>{const t=el.textContent.trim();if(!/^[\d,]+$/.test(t)||el.dataset.cu===t)return;el.dataset.cu=t;const to=+t.replace(/,/g,'');if(!to||to>1e9)return;const fmt=t.includes(',')||to>=1000,st=performance.now(),D=Math.min(900,350+Math.log10(to+1)*120);(function f(now){const k=Math.min((now-st)/D,1),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=fmt?v.toLocaleString():v;if(k<1)requestAnimationFrame(f)})(st)})}
 /* haptics: a light tap on buttons, chips, rows, tabs (turn off with localStorage iv_haptic=0) */
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('.btn,.chip,.rli,.nv button,.seg button,.ib,.ghost2,.inp .x'))buzz(6)},true);
 /* pull to refresh: drag down from the top of the page on the main screens */
@@ -387,8 +389,6 @@ if(!navigator.onLine){toast('You are offline',true);setTimeout(()=>{hide();busy=
 if(S.tab==='search'){S.res=[];S.searched=false}
 go(S.tab);setTimeout(()=>{hide();busy=false;toast('Refreshed')},900)};
 
-/* numbers count up when a screen opens (hero total, dashboard stats) */
-function animNums(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;document.querySelectorAll('.hero b,.stat b,.kpi b').forEach(el=>{const t=el.textContent.trim();if(!/^[\d,]+$/.test(t)||el.dataset.cu===t)return;el.dataset.cu=t;const to=+t.replace(/,/g,'');if(!to||to>1e9)return;const fmt=t.includes(',')||to>=1000,st=performance.now(),D=Math.min(900,350+Math.log10(to+1)*120);(function f(now){const k=Math.min((now-st)/D,1),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=fmt?v.toLocaleString():v;if(k<1)requestAnimationFrame(f)})(st)})}
 /* swipe a detail sheet down to close it */
 (()=>{let box=null,ov=null,sy=0,dy=0;
 document.addEventListener('touchstart',e=>{box=null;dy=0;const b=e.target.closest&&e.target.closest('.ov .box');if(!b||e.touches.length!==1||!b.parentNode.querySelector('#x')||b.scrollTop>0||e.target.closest('input,textarea,select'))return;box=b;ov=b.parentNode;sy=e.touches[0].clientY},{passive:true});
