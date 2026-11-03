@@ -285,6 +285,36 @@ position:relative;display:flex;flex-direction:column;height:calc(100dvh - 64px -
 .cm-card:not([hidden])~.cm-ctl{display:none}
 }
 @media(max-width:560px){.cmd input[type=date]{width:140px}.cm-ttl b{font-size:.88rem}.cm-chip{height:32px}}
+
+/* ===== MOBILE FIT PATCH: no overlaps, less sideways scrolling (CSS only) ===== */
+html{max-width:100%;overflow-x:hidden}body{max-width:100%;overflow-x:clip}
+img,svg,video,canvas{max-width:100%}
+.layout>*,.content,#main{min-width:0}
+/* search bar was sticky inside an overflow:hidden card, so it slid down over the Search button */
+#main .inp:first-of-type,.hero+.card .inp{position:relative;top:auto}
+.sc{overflow:visible}.sc>.btn.full{margin-top:14px}
+/* cards that were missing inner padding (Offline data etc.) */
+#offp{padding:16px 18px}
+.row>.btn.grow{flex:1 1 150px;min-width:0}.row input,.row select{min-width:0}
+.box,.vc,.tsum,.card p,.panel p,.kv{overflow-wrap:anywhere}
+.kv{flex-wrap:wrap}.kv span:last-child{min-width:0}
+.plate{max-width:100%}
+.tw{max-width:100%;-webkit-overflow-scrolling:touch}
+.mapbar select{min-width:0}
+@media(max-width:600px){
+.top{padding:8px 12px;gap:8px}.who{min-width:0}.wn{min-width:0}.wn b,.wn span{display:block;max-width:40vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.content{padding:14px 12px 110px}
+.hero{padding:16px}.hero b{font-size:2rem}
+.sc{padding:14px}
+.box{padding:18px 16px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+.plate b{font-size:1.35rem;padding:8px 10px;letter-spacing:.1em}
+.hst{grid-template-columns:repeat(2,1fr)}
+.fg{grid-template-columns:1fr}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kpi{padding:12px;gap:10px}.ki{width:36px;height:36px}.kpi b,.stat b{font-size:1.3rem}
+th,td{padding:10px 12px}
+.mapbar{padding:8px 10px}.mapbar select{flex:1 1 120px}.mapbar input[type=date]{width:130px!important}
+.rh{margin:14px 0 4px}
+}
 </style>
 </head><body><div id="app"><p style="text-align:center;margin-top:30vh">Loading…</p></div><div id="toast"></div>
 <script>
