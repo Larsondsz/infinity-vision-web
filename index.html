@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>INFINITY VISION</title>
-<meta name="theme-color" content="#0D1B34">
+<meta name="theme-color" content="#FFFFFF">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -321,6 +321,152 @@ th,td{padding:10px 12px}
 .dopen{flex:1;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--sf);color:var(--ink);cursor:pointer;font:inherit}.dopen:active{background:var(--accs)}
 .dx{flex:none;min-width:44px;height:44px;padding:0 4px;border-radius:10px;background:var(--accs);color:var(--acc);display:grid;place-items:center;font:800 .72rem Manrope,sans-serif;letter-spacing:.03em}
 .dn{min-width:0;display:block}.dn b{display:block;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dn small{display:block;color:var(--mut);font-size:.75rem;font-weight:600}
+
+/* search plate: stay white with dark text in dark mode, also while focused/typing (the generic input:focus rule was turning it dark) */
+#main .inp input,#main .inp input:focus{background:#fff;color:#0E1A2E;-webkit-text-fill-color:#0E1A2E;caret-color:#0E1A2E}
+#main .inp input:-webkit-autofill{-webkit-box-shadow:0 0 0 100px #fff inset;-webkit-text-fill-color:#0E1A2E}
+#main .inp input:focus{box-shadow:0 0 0 4px var(--accs),0 10px 26px -12px var(--acc)}
+
+/* =====================================================================
+   PROFESSIONAL BANKING SKIN: calm light theme, refined controls, tactile press feedback.
+   CSS only; no logic, data or Firebase touched. Dark theme stays available via data-theme="dark".
+   ===================================================================== */
+:root:not([data-theme="dark"]){--bg:#F3F5F8;--sf:#FFFFFF;--ink:#0E1B2E;--mut:#5A6A80;--line:#E2E7EE;--acc:#12489B;--accs:#EAF0FA;--onacc:#FFFFFF;--navy:#0B2447;--ok:#0A7A4B;--oks:#E3F4EC;--bad:#B42318;--bads:#FCECEA;--idle:#EEF1F6;--sh:0 1px 2px rgba(14,27,46,.05);--shl:0 16px 40px -8px rgba(14,27,46,.22);--r:10px;color-scheme:light}
+body{font-size:14.5px;line-height:1.5;letter-spacing:0;-webkit-tap-highlight-color:transparent}
+h1{font-size:1.45rem;font-weight:700;letter-spacing:-.015em}h2{font-size:1.2rem;font-weight:700;letter-spacing:-.01em}h3{font-size:1rem;font-weight:700;letter-spacing:-.005em}
+h4,.box h4{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+label{font-weight:600;font-size:.78rem;color:var(--ink);margin:14px 0 6px}
+/* surfaces */
+.card,.panel,.vc,.kpi,.stat,.tw{border-radius:12px;border:1px solid var(--line);box-shadow:var(--sh)}
+.card,.panel{background:var(--sf)}
+/* inputs */
+input,select{min-height:44px;border-radius:10px;border:1px solid #D3DAE5;background:#fff;color:var(--ink)}
+input:focus,select:focus{border-color:var(--acc);background:#fff;box-shadow:0 0 0 3px rgba(18,72,155,.14)}
+input::placeholder{color:#8A97AB}
+/* buttons: flat, confident, no neon glow */
+.btn{min-height:44px;border-radius:10px;font-weight:600;font-size:.9rem;letter-spacing:0;background:var(--acc);color:#fff;box-shadow:none!important;padding:0 18px}
+.btn:hover{filter:none}
+@media(hover:hover){.btn:not(.ghost):not(.wa):not(.danger):hover{background:#0F3D84}.btn.ghost:hover{background:var(--idle)}}
+.btn.ghost{background:#fff;color:var(--ink);border-color:#D3DAE5}
+.btn.wa{background:#168A4A}.btn.danger{background:var(--bad)}
+.btn.sm2{min-height:34px;border-radius:8px;font-size:.8rem}
+.ib{width:40px;height:40px;border-radius:10px;background:#fff}
+.ghost2{border-radius:9px;font-weight:600}
+/* top bar: white, quiet */
+.top,.top.dark,.top:not(.dark){background:#fff;color:var(--ink);border-bottom:1px solid var(--line);-webkit-backdrop-filter:none;backdrop-filter:none;min-height:56px}
+.top.dark .ib{background:#fff;border-color:var(--line);color:var(--ink)}.top.dark .ib:hover{background:var(--idle)}
+.top.dark .mb,.mb{color:var(--acc)}.top.dark .mb b,.mb b{color:var(--ink)}
+.top.dark .av,.av{background:var(--accs);color:var(--acc);border-radius:9px}
+.wn b{font-weight:600}.wn span{opacity:.75}
+/* navigation */
+@media(max-width:899px){.side{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border-top:1px solid var(--line);box-shadow:0 -1px 0 rgba(14,27,46,.02)}}
+.nv button{font-weight:600;font-size:10.5px;letter-spacing:.01em;color:var(--mut);border-radius:10px}
+.nv button.on{color:var(--acc);background:var(--accs)}
+@media(min-width:900px){.side{background:var(--navy);border-right:0}.side .nv button{font-weight:500}.side .nv button.on{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 3px 0 0 #7FB0FF}.side .nv button.on svg{color:#9DC1FF}}
+/* hero totals */
+.hero{background:linear-gradient(135deg,#0B2447,#133A7A);background-image:linear-gradient(135deg,#0B2447,#133A7A);border:0;border-radius:14px;padding:18px 20px;box-shadow:0 6px 18px -10px rgba(11,36,71,.55)}
+.hero b{font-size:2rem;font-weight:700;letter-spacing:-.02em}.hero span{font-weight:500;color:#B9C9E4}
+/* search */
+.sc{padding:16px}
+.seg{background:var(--idle);border-radius:10px;padding:3px}
+.seg button{font-weight:600;font-size:.84rem;border-radius:8px;padding:9px 4px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(14,27,46,.12)}
+.inp:before{background:var(--navy);border-radius:8px 0 0 8px}
+#main .inp input,#main .inp input:focus{background:#fff;color:#0E1A2E;-webkit-text-fill-color:#0E1A2E;caret-color:#0E1A2E}
+.inp input{min-height:52px;font-size:1.05rem;font-weight:600;letter-spacing:.08em;border:1.5px solid #C2CCDA;border-radius:10px;box-shadow:none}
+#main .inp input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(18,72,155,.16)}
+.inp .x{background:#EEF1F6;color:#5A6A80}
+.chip{border-radius:8px;font-weight:600;padding:6px 11px;letter-spacing:.02em}
+.rli{min-height:48px;border-radius:10px;box-shadow:none;background:#fff}
+.rli span{font-weight:600;font-size:1.1rem;letter-spacing:.1em}
+@media(hover:hover){.rli:hover{background:#F7F9FC;border-color:#C9D3E1}}
+.plate{border-width:1.5px;border-radius:7px}.plate b{font-weight:600;letter-spacing:.1em}
+.plate:after{display:none}
+.vt{font-weight:700}
+.pill{font-weight:600}
+/* stats */
+.stat b,.kpi b{font-size:1.4rem;font-weight:700}.ki{border-radius:10px}
+/* tables */
+th{background:#F7F9FC;color:var(--mut);font-weight:600;font-size:.7rem;letter-spacing:.06em}
+tbody tr:hover td{background:#F7F9FC}
+/* dialogs, toast */
+.ov{background:rgba(14,27,46,.45);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.box{border-radius:16px 16px 0 0;box-shadow:var(--shl)}@media(min-width:700px){.box{border-radius:16px}}
+.box::before{background:#D3DAE5}
+#toast{background:#0E1B2E;border-radius:10px;font-weight:500;font-size:.88rem;box-shadow:0 10px 30px -8px rgba(14,27,46,.45)}#toast.bad{background:var(--bad)}
+.empty{border:1px dashed #CBD4E1;border-radius:12px}
+/* sign in */
+.lbrand{background:linear-gradient(160deg,#0B2447,#133A7A);background-image:linear-gradient(160deg,#0B2447,#133A7A)}
+.lbrand h1{font-weight:700;letter-spacing:.12em}
+.lform{border-radius:14px}
+/* calmer motion */
+#main>*{animation:fade .18s ease-out both}
+.rl .rli,.rl .rli:nth-child(n){animation:fade .18s ease-out both;animation-delay:0s}
+/* documents */
+.dx{background:var(--accs);color:var(--acc);border-radius:9px}
+.dopen{border-radius:10px;box-shadow:none}
+
+/* ---- tactile press feedback on every control ---- */
+button,.btn,.chip,.rli,.ib,.ti,.dopen,.ghost2,.seg button,.nv button,.cm-ib,.cm-btn,.cm-chip,.cm-li,.cm-flt button,.cm-seg button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.btn,.chip,.rli,.ib,.dopen,.ghost2,.seg button,.nv button{transition:transform .09s ease-out,background-color .12s,border-color .12s,filter .12s,box-shadow .12s}
+.btn:active,.chip:active,.ib:active,.ghost2:active,.seg button:active,.nv button:active,.cm-btn:active,.cm-ib:active,.cm-chip:active{transform:scale(.97)}
+.rli:active,.dopen:active,.cm-li:active{transform:scale(.985)}
+.btn:not(.ghost):active{filter:brightness(.92)}.btn.ghost:active,.rli:active,.dopen:active{background:var(--accs)}
+
+/* ---- Command Map: same calm light look ---- */
+.cmd{--c0:#F3F5F9;--c1:#FFFFFF;--c2:#F1F4F8;--c3:#E7ECF3;--cl:#DDE3EC;--ct:#0E1B2E;--cm:#5A6A80;--ca:#12489B;--g:#0E9F6E;--w:#D97706;--r:#DC2626;--o:#8391A7;--p:#6D5BD0}
+#cmM{background:#E9EEF4}
+.cm-logo{background:rgba(18,72,155,.08);color:#12489B;border-color:rgba(18,72,155,.2)}
+.cm-seg button.on,.cm-btn.pri{background:var(--ca);color:#fff}
+.cm-ib:hover,.cm-btn:hover,.cm-chip:hover{background:var(--c3);border-color:#C5CFDD}
+.cm-chip.on,.cm-flt button.on{background:rgba(18,72,155,.1);border-color:var(--ca);color:#12489B}
+.cmd input::placeholder{color:#8A97AB}.cmd input:focus{border-color:var(--ca);box-shadow:0 0 0 3px rgba(18,72,155,.16)}
+.cm-flt button i{background:rgba(14,27,46,.06)}
+.cm-li.on{background:rgba(18,72,155,.07);border-color:rgba(18,72,155,.35)}
+.cm-av{color:var(--ct)}
+.cm-hb:hover{color:var(--ct)}
+.cm-mw .leaflet-control-attribution{background:rgba(255,255,255,.85);color:#5A6A80}.cm-mw .leaflet-control-attribution a{color:#12489B}
+.cm-ctl .cm-ib{background:rgba(255,255,255,.97);box-shadow:0 4px 14px rgba(14,27,46,.18)}.cm-ctl .zz{box-shadow:0 4px 14px rgba(14,27,46,.18)}
+.cm-lg{background:rgba(255,255,255,.97);box-shadow:0 4px 14px rgba(14,27,46,.12)}
+.cm-bn{background:#FFF4E0;border-color:#F2C77B;color:#7A4B00}.cm-bn.bd{background:#FDECEC;border-color:#F1B1B1;color:#8A1C1C}
+.cm-card{background:rgba(255,255,255,.98);border-color:var(--cl);box-shadow:0 14px 36px -8px rgba(14,27,46,.28);border-radius:16px}
+.cm-al{color:var(--ct)}
+.cmk .bd{background:#fff;color:#0E1B2E}
+.cm-tt{background:#0E1B2E;color:#fff;border-color:#0E1B2E}
+.cm-side{box-shadow:0 0 30px rgba(14,27,46,.25)}.cm-body.open:after{background:rgba(14,27,46,.35)}
+
+/* ---- loan cards, bank filter, loan detail ---- */
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:12px}
+.lcard{display:flex;flex-direction:column;gap:12px;text-align:left;width:100%;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--sf);color:var(--ink);cursor:pointer;box-shadow:var(--sh);font:inherit;transition:transform .15s,border-color .15s,box-shadow .15s}
+@media(hover:hover){.lcard:hover{border-color:color-mix(in srgb,var(--acc) 45%,var(--line));box-shadow:0 10px 24px -14px rgba(16,27,46,.4);transform:translateY(-1px)}}
+.lcard:active{transform:scale(.99)}
+.lc-top{display:flex;align-items:center;gap:12px}.lc-top>i{font-style:normal;font-size:1.5rem;color:var(--mut);line-height:1}
+.lc-av{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font:800 .88rem Manrope,sans-serif;letter-spacing:.02em;background:hsl(var(--h) 70% 50%/.14);color:hsl(var(--h) 65% 36%)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .lc-av{color:hsl(var(--h) 80% 74%)}}
+:root[data-theme="dark"] .lc-av{color:hsl(var(--h) 80% 74%)}
+.lc-av.lg{width:54px;height:54px;border-radius:15px;font-size:1.05rem}
+.lc-id{min-width:0;flex:1}.lc-id b{display:block;font-size:.98rem;font-weight:700;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lc-id small{display:block;font:600 .8rem "Barlow Semi Condensed",Manrope,sans-serif;letter-spacing:.08em;color:var(--mut);margin-top:2px;overflow:hidden;text-overflow:ellipsis}
+.lc-tags,.ld-tags{display:flex;gap:6px;flex-wrap:wrap}
+.lc-bank,.lc-type{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.74rem;font-weight:700}
+.lc-bank{background:var(--accs);color:var(--acc)}.lc-type{background:var(--idle);color:var(--mut)}
+.lc-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;padding-top:11px;border-top:1px dashed var(--line)}
+.lc-meta span{display:block;font-size:.66rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}.lc-meta b{font-size:.88rem;font-weight:700;word-break:break-word}
+.lc-ph{display:flex;align-items:center;gap:8px;margin-top:-2px;padding:8px 10px;border-radius:10px;background:var(--idle);font-weight:700;font-size:.9rem;letter-spacing:.02em}.lc-ph svg{width:16px;height:16px;color:var(--acc);flex:none}.lc-ph:hover{background:var(--accs)}
+.lfb-h{display:flex;gap:12px;align-items:center;margin-bottom:14px}.lfb-ic{width:40px;height:40px;border-radius:11px;background:var(--accs);color:var(--acc);display:grid;place-items:center;flex:none}.lfb-ic svg{width:20px;height:20px}
+.lfb-h b{display:block;font-size:.98rem}.lfb-h small{font-size:.8rem}
+.lfb-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:640px){.lfb-row{grid-template-columns:1fr}}
+.lfb label{margin:0 0 6px}
+.lfb-chips{display:flex;gap:6px;overflow-x:auto;padding:14px 0 2px;scrollbar-width:none}.lfb-chips::-webkit-scrollbar{display:none}.lfb-chips .chip{white-space:nowrap;flex:none}
+.chips .chip.on,.lfb-chips .chip.on{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+.ld-head{display:flex;align-items:center;gap:14px}.ld-t{min-width:0}
+.ld-t small{display:block;font-size:.66rem;font-weight:700;letter-spacing:.12em;color:var(--mut)}.ld-t b{display:block;font-size:1.2rem;line-height:1.25;font-weight:800;letter-spacing:-.01em;word-break:break-word}
+.ld-no{display:block;font:600 .92rem "Barlow Semi Condensed",Manrope,sans-serif;letter-spacing:.1em;color:var(--mut);word-break:break-all}
+.ld-tags{margin-top:12px}
+.ld-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.ld-tiles div{background:var(--idle);border-radius:12px;padding:10px 12px}
+.ld-tiles span{display:block;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}.ld-tiles b{font-size:1.02rem;font-weight:800;word-break:break-word}
+.ld-sec{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:2px 14px 4px}
+.ld-sec>h4{margin:12px 0 2px;font-size:.7rem;text-transform:uppercase;letter-spacing:.09em}.ld-sec .kv:last-of-type{border-bottom:0}
 </style>
 </head><body><div id="app"><p style="text-align:center;margin-top:30vh">Loading…</p></div><div id="toast"></div>
 <script>
@@ -354,12 +500,46 @@ function toast(m,bad){buzz(bad?[30,50,30]:8);const t=$('#toast');t.textContent=m
 const E=e=>{const c=String(e?.code||'');toast(c.includes('permission')?'Access denied by database rules. Publish firestore.rules in Firebase.':/unavailable|network/.test(c)?'Network error. Check your connection and try again.':/invalid-credential|wrong-password|user-not-found|invalid-email/.test(c)?'Invalid mobile number or password':c.includes('email-already')?'This mobile number is already registered':c.includes('weak-password')?'Password is too weak':e?.message||'Something went wrong',true)};
 const cn=async q=>{if(!navigator.onLine)return+(localStorage.getItem('iv_off_n')||0);return(await getCountFromServer(q)).data().count};
 const fbp=p=>p.length<6?'iv-pw-'+p:p; // Firebase Auth needs 6+ characters; shorter passwords (min 4 in this app) are padded the same way every time
+/* haptics: a short tick on every tap of a control (Android / Chrome; iPhone Safari does not allow web vibration). Turn off with localStorage iv_haptic = '0'. */
+(()=>{const SEL='button,.btn,.chip,.rli,.ib,.ti,.dopen,.ghost2,.seg button,.nv button,.cm-ib,.cm-btn,.cm-chip,.cm-li,.cm-flt button,.cm-seg button,a.btn,[data-act],[data-d],[data-a],select';
+addEventListener('pointerdown',e=>{try{const t=e.target.closest&&e.target.closest(SEL);if(!t||t.disabled||t.getAttribute('aria-disabled')==='true')return;buzz(t.matches('.btn:not(.ghost):not(.sm2),.seg button,.nv button,.cm-btn.pri')?12:6)}catch{}},{passive:true,capture:true})})();
 const gd=q=>navigator.onLine?getDocs(q):FSX.getDocsFromCache(q),gdoc=r=>navigator.onLine?getDoc(r):FSX.getDocFromCache(r);
 const col=n=>collection(fs,n);
 let S={u:null,tab:'search',kind:'reg',res:[],shown:20,sort:'reg',term:'',busy:false},idle;
 function arm(){} // no idle timeout: users stay signed in until they log out
 ['click','keydown','touchstart'].forEach(e=>addEventListener(e,arm));
 const log=o=>{const e={...o,uid:S.u.uid,u:S.u.u,name:S.u.name,role:S.u.role,at:Date.now()};if(S.localMode){try{const q=JSON.parse(localStorage.getItem('iv_logq')||'[]');q.push(e);localStorage.setItem('iv_logq',JSON.stringify(q.slice(-500)))}catch{}return}return addDoc(col('logs'),e).catch(()=>{})};
+/* ---------- finance picker: asked on every upload, names are remembered ---------- */
+const FINK='iv_finances',FINL='iv_fin_last';
+const finSaved=()=>{try{return JSON.parse(localStorage.getItem(FINK)||'[]').filter(Boolean)}catch{return[]}};
+function saveFin(n){n=String(n||'').trim();if(!n)return;try{const k=bankKey(n),a=finSaved().filter(x=>bankKey(x)!==k);a.unshift(n);localStorage.setItem(FINK,JSON.stringify(a.slice(0,200)));localStorage.setItem(FINL,n)}catch{}}
+async function finList(){const m=new Map();finSaved().forEach(x=>m.set(bankKey(x),x));
+try{(await gd(query(col('loanImports'),orderBy('at','desc'),limit(50)))).docs.forEach(d=>(d.data().banks||[]).forEach(b=>{const k=bankKey(b);if(k&&!m.has(k))m.set(k,String(b).trim())}))}catch{}
+let last='';try{last=localStorage.getItem(FINL)||''}catch{}
+return[...m.values()].sort((a,b)=>(bankKey(b)===bankKey(last))-(bankKey(a)===bankKey(last))||a.localeCompare(b,'en',{sensitivity:'base'}))}
+async function pickFinance(name){const list=await finList();let last='',msg='';try{last=localStorage.getItem(FINL)||''}catch{}
+for(;;){const pr=dlg(`<h3 style="margin-top:0">Which finance is this file for?</h3><p class="mut sm" style="margin:0 0 12px">${esc(name)}</p>${list.length?`<p class="sm" style="font-weight:700;margin:0 0 6px">Saved finances</p><div class="chips" id="fpc">${list.map(x=>`<button type="button" class="chip" data-fin="${esc(x)}">${esc(x)}</button>`).join('')}</div>`:''}<label for="fpi" style="margin:14px 0 6px">${list.length?'Or type a new finance name':'Type the finance name'}</label><input id="fpi" type="text" autocomplete="off" placeholder="e.g. HDFC Bank" value="${esc(last)}">${msg?`<p class="sm" style="color:var(--bad);font-weight:700;margin:8px 0 0">${esc(msg)}</p>`:''}<p class="mut sm" style="margin:8px 0 0">New names are remembered and shown here next time.</p><div class="row" style="margin-top:14px"><button class="btn ghost grow" data-r="no">Cancel</button><button class="btn grow" data-r="ok">Continue</button></div>`);
+const o=[...document.querySelectorAll('.ov')].pop(),inp=o.querySelector('#fpi'),sync=()=>o.querySelectorAll('[data-fin]').forEach(b=>b.classList.toggle('on',bankKey(b.dataset.fin)===bankKey(inp.value)));
+o.addEventListener('click',e=>{const c=e.target.closest('[data-fin]');if(c){inp.value=c.dataset.fin;sync()}});inp.oninput=sync;inp.onkeydown=e=>{if(e.key==='Enter')o.querySelector('[data-r=ok]').click()};sync();setTimeout(()=>{inp.focus();inp.select()},50);
+const v=await pr;if(v===false||v===undefined)throw new Error('cancel');
+const t=String(v).trim();if(!t){msg='Please choose or type a finance name.';continue}
+const hit=list.find(x=>bankKey(x)===bankKey(t));const fin=hit||t;saveFin(fin);return fin}}
+/* ---------- Excel reader with password-protected file support ---------- */
+let XPL=null;
+function loadXP(){return XPL||(XPL=new Promise((ok,no)=>{if(window.XlsxPopulate)return ok(window.XlsxPopulate);const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx-populate/1.21.0/xlsx-populate.min.js';sc.onload=()=>window.XlsxPopulate?ok(window.XlsxPopulate):(XPL=null,no(new Error('lib')));sc.onerror=()=>{XPL=null;no(new Error('lib'))};document.head.appendChild(sc)}))}
+function askFilePw(name,msg,bad){const pr=dlg(`<h3 style="margin-top:0">Password required</h3><p class="mut sm" style="margin:0 0 4px">${esc(name)}</p><p class="${bad?'':'mut '}sm" style="${bad?'color:var(--bad);font-weight:700;':''}margin:6px 0 10px">${esc(msg)}</p><input type="password" autocomplete="off" placeholder="File password" style="width:100%"><label class="row sm" style="margin:10px 0 0;font-weight:600;gap:8px"><input type="checkbox" style="width:auto;min-height:0" id="pwsh"> Show password</label><div class="row" style="margin-top:14px"><button class="btn ghost grow" data-r="no">Cancel</button><button class="btn grow" data-r="ok">Open file</button></div>`);
+const o=[...document.querySelectorAll('.ov')].pop(),i=o&&o.querySelector('input[type=password]');if(i){i.focus();i.onkeydown=e=>{if(e.key==='Enter')o.querySelector('[data-r=ok]').click()};const c=o.querySelector('#pwsh');if(c)c.onchange=()=>{i.type=c.checked?'text':'password'}}
+return pr}
+async function readBook(f){const buf=await f.arrayBuffer(),csv=/\.csv$/i.test(f.name),opt={type:'array',cellText:true,raw:csv},u=new Uint8Array(buf.slice(0,4));
+if(!(u[0]===0xD0&&u[1]===0xCF&&u[2]===0x11&&u[3]===0xE0))return XLSX.read(buf,opt); // normal xlsx / csv (zip or text)
+let enc=false;try{const c=XLSX.CFB.read(new Uint8Array(buf),{type:'array'});enc=!!(XLSX.CFB.find(c,'EncryptionInfo')||XLSX.CFB.find(c,'/EncryptionInfo'))}catch{}
+if(!enc){try{return XLSX.read(buf,opt)}catch(e){if(!/password|encrypt/i.test(String(e&&e.message)))throw e}}
+let msg='This file is password protected. Enter the password to open it.',bad=false;
+for(let t=0;t<6;t++){const pw=await askFilePw(f.name,msg,bad);if(pw===false||pw===undefined)throw new Error('cancel');if(!pw){msg='Please enter the password.';bad=true;continue}
+try{if(enc){const XP=await loadXP();const wb=await XP.fromDataAsync(buf,{password:pw});return XLSX.read(await wb.outputAsync('arraybuffer'),opt)}
+return XLSX.read(buf,{...opt,password:pw})}catch(e){if(e&&e.message==='lib')throw e;msg='Wrong password. Please try again.';bad=true}}
+throw new Error('pw')}
+function bookErr(e,sel){const i=$(sel);if(i)i.value='';const m=e&&e.message;if(m==='cancel')return;toast(m==='lib'?'Could not load the unlock helper. Check your internet and try again.':m==='pw'?'Too many wrong attempts. Please try again.':'Could not read this file',true)}
 function dlg(html){return new Promise(res=>{const d=document.createElement('div');d.className='ov';d.innerHTML=`<div class="box">${html}</div>`;document.body.appendChild(d);d.onclick=e=>{const b=e.target.closest('[data-r]');if(b){const i=d.querySelector('input');d.remove();res(b.dataset.r==='ok'?(i?i.value:true):false)}else if(e.target===d){d.remove();res(false)}}})}
 const ask=m=>dlg(`<p>${m}</p><div class="row"><button class="btn ghost grow" data-r="no">Cancel</button><button class="btn grow" data-r="ok">Confirm</button></div>`);
 function copy(t){try{navigator.clipboard.writeText(t).then(()=>toast('Copied'),()=>fb())}catch{fb()}function fb(){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();toast('Copied')}}
@@ -595,20 +775,20 @@ function shell(){const a=S.u.role==='admin';S.panel=canLoans()?(PANEL_OF[S.tab]|
 const top=`<header class="top"><div class="mb">${logo()}<b>INFINITY VISION</b></div><div class="grow"></div><div class="who"><div class="av">${esc((S.u.name[0]||'U').toUpperCase())}</div><div class="wn"><b>${esc(S.u.name)}</b><span>${a?'Administrator':'Field officer'}</span></div></div><button class="ib" id="out" aria-label="Log out" title="Log out">${ic('out')}</button></header>`;
 $('#app').innerHTML=`<div class="layout"><aside class="side"><div class="sb"><div class="mb">${logo()}<b>INFINITY<br>VISION</b></div></div><div class="nv">${navItems().map(n=>`<button data-t="${n[0]}">${ic(n[2])}<span>${n[1]}</span></button>`).join('')}</div></aside><section>${top}${canLoans()?`<div class="content" style="padding-top:14px;padding-bottom:0"><div class="seg" id="psw"><button data-p="vehicles" class="${S.panel==='vehicles'?'on':''}">Vehicles</button><button data-p="loans" class="${S.panel==='loans'?'on':''}">Loans</button></div></div>`:''}<main id="main" class="content"></main></section></div>`;
 $('#out').onclick=()=>logout();if(S.u.role!=='admin'&&!S.u.vip)locStart();const sw=$('#psw');if(sw)sw.onclick=e=>{const b=e.target.closest('[data-p]');if(!b||b.dataset.p===S.panel)return;go(b.dataset.p==='loans'?'loans':'search')};const nv=document.querySelector('.nv');if(nv)nv.onclick=e=>{const b=e.target.closest('[data-t]');if(b)go(b.dataset.t)};go(S.tab);setTimeout(()=>{const m=OM();if(m.full&&navigator.onLine&&Date.now()-m.at>6*36e5)offSync(false)},4000)}
-const PANEL_OF={search:'vehicles',all:'vehicles',imp:'vehicles',db:'vehicles',loans:'loans',limp:'loans'};
+const PANEL_OF={search:'vehicles',all:'vehicles',imp:'vehicles',db:'vehicles',loans:'loans',lall:'loans',limp:'loans'};
 function navItems(){const a=S.u.role==='admin',p=S.panel==='loans'?'loans':'vehicles';
-if(!a)return p==='loans'?[['loans','Loan search','search']]:[['search','Search','search'],['all','All vehicles','car']];
-const v=[['search','Search','search'],['all','All vehicles','car'],['imp','Vehicle import','import'],['db','Database','db']],l=[['loans','Loan search','search'],['limp','Loan import','import']],c=[['live','Live','live'],['cmd','Command Map','map'],['staff','Staff','staff'],['act','Activity','list']];
+if(!a)return p==='loans'?[['loans','Loan search','search'],['lall','All loans','loan']]:[['search','Search','search'],['all','All vehicles','car']];
+const v=[['search','Search','search'],['all','All vehicles','car'],['imp','Vehicle import','import'],['db','Database','db']],l=[['loans','Loan search','search'],['lall','All loans','loan'],['limp','Loan import','import']],c=[['live','Live','live'],['cmd','Command Map','map'],['staff','Staff','staff'],['act','Activity','list']];
 return[['dash','Dashboard','home'],...(p==='loans'?l:v),...c]}
 function paintNav(){const nv=document.querySelector('.nv');if(nv)nv.innerHTML=navItems().map(n=>`<button data-t="${n[0]}">${ic(n[2])}<span>${n[1]}</span></button>`).join('');const sw=document.getElementById('psw');if(sw)sw.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.p===S.panel))}
-const V={dash:vDash,search:vSearch,all:vAll,loans:vLoans,live:vLive,cmd:vCmd,staff:vStaff,imp:vImp,limp:vLimp,db:vDb,act:vAct};
+const V={dash:vDash,search:vSearch,all:vAll,loans:vLoans,lall:vLoanAll,live:vLive,cmd:vCmd,staff:vStaff,imp:vImp,limp:vLimp,db:vDb,act:vAct};
 function go(t){if(LIVE){LIVE();LIVE=null}S.tab=t;if(PANEL_OF[t]&&PANEL_OF[t]!==S.panel){S.panel=PANEL_OF[t];paintNav()}document.querySelectorAll('.nv button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));V[t]().then(()=>animNums()).catch(E)}
 /* numbers count up when a screen opens (hero total, dashboard stats) */
 function animNums(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;document.querySelectorAll('.hero b,.stat b,.kpi b').forEach(el=>{const t=el.textContent.trim();if(!/^[\d,]+$/.test(t)||el.dataset.cu===t)return;el.dataset.cu=t;const to=+t.replace(/,/g,'');if(!to||to>1e9)return;const fmt=t.includes(',')||to>=1000,st=performance.now(),D=Math.min(900,350+Math.log10(to+1)*120);(function f(now){const k=Math.min((now-st)/D,1),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=fmt?v.toLocaleString():v;if(k<1)requestAnimationFrame(f)})(st)})}
 /* haptics: a light tap on buttons, chips, rows, tabs (turn off with localStorage iv_haptic=0) */
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('.btn,.chip,.rli,.nv button,.seg button,.ib,.ghost2,.inp .x'))buzz(6)},true);
 /* pull to refresh: drag down from the top of the page on the main screens */
-(()=>{const OK=['dash','search','all','loans','live','act','db','staff'],TH=72,MAXP=130;let sy=0,pv=0,on=false,busy=false,armed=false,el=null;
+(()=>{const OK=['dash','search','all','loans','lall','live','act','db','staff'],TH=72,MAXP=130;let sy=0,pv=0,on=false,busy=false,armed=false,el=null;
 const top=()=>(document.scrollingElement||document.documentElement).scrollTop<=0;
 const mk=()=>{if(el&&el.isConnected)return el;el=document.createElement('div');el.id='ptr';el.setAttribute('aria-hidden','true');el.innerHTML=ic('refresh');document.body.appendChild(el);return el};
 const paint=p=>{const e=mk(),k=Math.min(p/TH,1);e.style.transition='none';e.style.opacity=k;e.style.transform='translateY('+(Math.min(p,MAXP)*.55-40)+'px)';e.firstChild.style.transform='rotate('+(p*3)+'deg)';e.classList.toggle('rdy',k>=1)};
@@ -698,7 +878,7 @@ function loadLeaflet(){if(window.L&&window.L.map)return Promise.resolve();if(_lf
 const fmtT=t=>new Date(t).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}),fmtDur=ms=>{const m=Math.max(1,Math.round(ms/6e4));return m<60?m+' min':(m/60|0)+' h '+(m%60)+' min'},pd=(a,b)=>locDist({lat:a.la,lng:a.ln},{lat:b.la,lng:b.ln}),kmh=(a,b)=>{const h=(b.t-a.t)/36e5;return h>0?pd(a,b)/1000/h:0};
 function analyse(pts){let dist=0;const segs=[],stops=[];for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],d=pd(a,b),dt=b.t-a.t,v=dt>0?d/1000/(dt/36e5):0,gap=dt>20*6e4;let cd=0;if(!gap&&v<200&&d>Math.max(25,(a.a||0)/2)){dist+=d;cd=d}segs.push({a,b,gap,cd,c:gap?'#94a3b8':v<7?'#16a34a':v<30?'#2563eb':'#ea580c'})}
 let i=0;while(i<pts.length){let j=i+1;while(j<pts.length&&pd(pts[i],pts[j])<=80)j++;if(pts[j-1].t-pts[i].t>=8*6e4){const g=pts.slice(i,j);stops.push({a:pts[i].t,b:pts[j-1].t,la:g.reduce((x,p)=>x+p.la,0)/g.length,ln:g.reduce((x,p)=>x+p.ln,0)/g.length});i=j}else i++}return{dist,segs,stops}}
-const CARTO_KEY='cb1_50vm_1_5d9b8761212d6fba14bccbb5',TILE_DARK='https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png?key='+CARTO_KEY;
+const CARTO_KEY='cb1_50vm_1_5d9b8761212d6fba14bccbb5',TILE_DARK='https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key='+CARTO_KEY;
 function baseLayer(){let n=0;const l=L.tileLayer(TILE_DARK,{maxZoom:19,attribution:'© OpenStreetMap · © CARTO'});l.on('tileerror',()=>{if(++n===8)l.setUrl('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')});return l}
 const TILE='https://tile.openstreetmap.org/{z}/{x}/{y}.png',pinIcon=(t,c)=>L.divIcon({className:'',html:'<div class="stp" style="background:'+c+'">'+t+'</div>',iconSize:[26,26],iconAnchor:[13,13]});
 const GEO=(()=>{try{const g=JSON.parse(localStorage.getItem('iv_geo')||'{}');return Object.keys(g).length>600?{}:g}catch{return{}}})(),geoKey=(la,ln)=>la.toFixed(4)+','+ln.toFixed(4);
@@ -792,7 +972,7 @@ const TL={dark:['https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.
 const MK={mapbox:['Mapbox',k=>({dark:'https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token='+k,street:'https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}@2x?access_token='+k,sat:'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v12/tiles/256/{z}/{x}/{y}@2x?access_token='+k}),'© Mapbox © OpenStreetMap'],maptiler:['MapTiler',k=>({dark:'https://api.maptiler.com/maps/dataviz-dark/256/{z}/{x}/{y}.png?key='+k,street:'https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key='+k,sat:'https://api.maptiler.com/maps/satellite/256/{z}/{x}/{y}.jpg?key='+k}),'© MapTiler © OpenStreetMap'],stadia:['Stadia Maps',k=>({dark:'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key='+k,street:'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key='+k,sat:'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg?api_key='+k}),'© Stadia Maps © OpenMapTiles © OpenStreetMap']};
 const KS='cmMapKey';let KV=null;try{KV=JSON.parse(localStorage.getItem(KS)||'null')}catch(e){}
 const applyKey=()=>{['pk_dark','pk_street','pk_sat'].forEach(x=>delete TL[x]);if(KV&&KV.k&&MK[KV.p]){const m=MK[KV.p],u=m[1](encodeURIComponent(KV.k.trim()));TL.pk_dark=[u.dark,m[2],{},m[0]+' Dark'];TL.pk_street=[u.street,m[2],{},m[0]+' Street'];TL.pk_sat=[u.sat,m[2],{},m[0]+' Satellite']}};applyKey();
-const setTiles=k=>{tk=k;if(tl)map.removeLayer(tl);let er=0;const t=TL[k];tl=L.tileLayer(t[0],{maxZoom:19,attribution:t[1],...t[2]}).addTo(map);tl.on('tileerror',()=>{if((k==='dark'||k==='voyager')&&++er>8){const nx=k==='dark'?'voyager':'sat';toast('CARTO '+k+' tiles failed. Switched to '+TL[nx][3]+'.',true);setTiles(nx)}else if(k.startsWith('pk_')&&++er>8){toast('Map API key was rejected or the tiles failed to load. Switched to the free map.',true);setTiles('dark')}})};setTiles(TL.pk_dark?'pk_dark':'dark');
+const setTiles=k=>{tk=k;if(tl)map.removeLayer(tl);let er=0;const t=TL[k];tl=L.tileLayer(t[0],{maxZoom:19,attribution:t[1],...t[2]}).addTo(map);tl.on('tileerror',()=>{if((k==='dark'||k==='voyager')&&++er>8){const nx=k==='voyager'?'dark':(k==='dark'?'sat':'voyager');toast('CARTO '+k+' tiles failed. Switched to '+TL[nx][3]+'.',true);setTiles(nx)}else if(k.startsWith('pk_')&&++er>8){toast('Map API key was rejected or the tiles failed to load. Switched to the free map.',true);setTiles('dark')}})};setTiles(TL.pk_dark?'pk_dark':'voyager');
 const live=hasCl?L.markerClusterGroup({maxClusterRadius:48,showCoverageOnHover:false,spiderfyOnMaxZoom:true,iconCreateFunction:c=>{const ms=c.getAllChildMarkers(),w=ms.some(m=>m.cmK==='noloc')?'noloc':ms.every(m=>m.cmK==='live')?'live':ms.some(m=>m.cmK==='stale')?'stale':'off';return L.divIcon({className:'',html:'<div class="cmc '+w+'"><span>'+c.getChildCount()+'</span></div>',iconSize:[46,46]})}}):L.layerGroup();
 const hl=L.layerGroup(),accC=L.layerGroup().addTo(map);map.addLayer(live);
 const mk=new Map();
@@ -875,7 +1055,7 @@ q('#cmL').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){const li=e.target.close
 q('#cmC').onclick=e=>{if(e.target.closest('[data-x]')){sel=null;hsel=null;cardK='';mode==='hist'?(drawHist(),paintList(),paintCard()):paintAll();return}const a=e.target.closest('[data-a]');if(!a)return;if(a.dataset.a==='hist')openHist(sel);else if(a.dataset.a==='tl')openHist(hsel,hday);else if(a.dataset.a==='fit'){mode==='hist'?fit(hsel):focus(sel)}};
 map.on('click',()=>{if(sel||hsel){sel=null;hsel=null;cardK='';mode==='hist'?(drawHist(),paintList(),paintCard()):paintAll()}});
 q('#cmZi').onclick=()=>map.zoomIn();q('#cmZo').onclick=()=>map.zoomOut();q('#cmFit').onclick=()=>fit();
-q('#cmKey').onclick=()=>{const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px';const f='width:100%;box-sizing:border-box;padding:11px 12px;border-radius:10px;border:1px solid #2A3A5E;background:#0B1730;color:#E6EEFF;font-size:15px;margin-top:6px';o.innerHTML=`<div style="width:100%;max-width:420px;background:#0F1E3D;border:1px solid #2A3A5E;border-radius:16px;padding:18px;color:#E6EEFF;font-family:inherit"><b style="font-size:17px">Map API key</b><p style="color:#8EA1C6;font-size:13px;margin:6px 0 14px">Paste your key to use premium map tiles in the Command Map. It is stored only in this browser. Without a key, the free maps are used.</p><label style="font-size:13px;color:#8EA1C6">Provider</label><select id="mkP" style="${f}">${Object.keys(MK).map(x=>`<option value="${x}">${MK[x][0]}</option>`).join('')}</select><label style="font-size:13px;color:#8EA1C6;display:block;margin-top:12px">API key / access token</label><input id="mkK" type="password" autocomplete="off" spellcheck="false" placeholder="Paste key here" style="${f}"><label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px;color:#8EA1C6"><input type="checkbox" id="mkS" style="width:16px;height:16px;margin:0">Show key</label><div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button id="mkSave" style="flex:1;padding:11px;border:0;border-radius:10px;background:#4F8BFF;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Save</button><button id="mkDel" style="padding:11px 14px;border:1px solid #2A3A5E;border-radius:10px;background:transparent;color:#FF8A96;font-weight:700;font-size:14px;cursor:pointer">Remove</button><button id="mkX" style="padding:11px 14px;border:1px solid #2A3A5E;border-radius:10px;background:transparent;color:#E6EEFF;font-weight:700;font-size:14px;cursor:pointer">Cancel</button></div></div>`;document.body.appendChild(o);const g=i=>o.querySelector(i);if(KV){g('#mkP').value=KV.p;g('#mkK').value=KV.k||''}const cl=()=>o.remove();o.onclick=e=>{if(e.target===o)cl()};g('#mkX').onclick=cl;g('#mkS').onchange=e=>{g('#mkK').type=e.target.checked?'text':'password'};g('#mkSave').onclick=()=>{const k=g('#mkK').value.trim();if(!k){toast('Paste your API key first',true);return}KV={p:g('#mkP').value,k};try{localStorage.setItem(KS,JSON.stringify(KV))}catch(e){toast('Could not save the key in this browser',true)}applyKey();setTiles('pk_dark');cl();toast('Map key saved')};g('#mkDel').onclick=()=>{KV=null;try{localStorage.removeItem(KS)}catch(e){}applyKey();setTiles('dark');cl();toast('Map key removed')}};
+q('#cmKey').onclick=()=>{const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px';const f='width:100%;box-sizing:border-box;padding:11px 12px;border-radius:10px;border:1px solid #D3DAE5;background:#fff;color:#0E1B2E;font-size:15px;margin-top:6px';o.innerHTML=`<div style="width:100%;max-width:420px;background:#fff;border:1px solid #D3DAE5;border-radius:16px;padding:18px;color:#0E1B2E;font-family:inherit"><b style="font-size:17px">Map API key</b><p style="color:#5A6A80;font-size:13px;margin:6px 0 14px">Paste your key to use premium map tiles in the Command Map. It is stored only in this browser. Without a key, the free maps are used.</p><label style="font-size:13px;color:#5A6A80">Provider</label><select id="mkP" style="${f}">${Object.keys(MK).map(x=>`<option value="${x}">${MK[x][0]}</option>`).join('')}</select><label style="font-size:13px;color:#5A6A80;display:block;margin-top:12px">API key / access token</label><input id="mkK" type="password" autocomplete="off" spellcheck="false" placeholder="Paste key here" style="${f}"><label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px;color:#5A6A80"><input type="checkbox" id="mkS" style="width:16px;height:16px;margin:0">Show key</label><div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button id="mkSave" style="flex:1;padding:11px;border:0;border-radius:10px;background:#12489B;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Save</button><button id="mkDel" style="padding:11px 14px;border:1px solid #2A3A5E;border-radius:10px;background:transparent;color:#FF8A96;font-weight:700;font-size:14px;cursor:pointer">Remove</button><button id="mkX" style="padding:11px 14px;border:1px solid #D3DAE5;border-radius:10px;background:transparent;color:#0E1B2E;font-weight:700;font-size:14px;cursor:pointer">Cancel</button></div></div>`;document.body.appendChild(o);const g=i=>o.querySelector(i);if(KV){g('#mkP').value=KV.p;g('#mkK').value=KV.k||''}const cl=()=>o.remove();o.onclick=e=>{if(e.target===o)cl()};g('#mkX').onclick=cl;g('#mkS').onchange=e=>{g('#mkK').type=e.target.checked?'text':'password'};g('#mkSave').onclick=()=>{const k=g('#mkK').value.trim();if(!k){toast('Paste your API key first',true);return}KV={p:g('#mkP').value,k};try{localStorage.setItem(KS,JSON.stringify(KV))}catch(e){toast('Could not save the key in this browser',true)}applyKey();setTiles('pk_dark');cl();toast('Map key saved')};g('#mkDel').onclick=()=>{KV=null;try{localStorage.removeItem(KS)}catch(e){}applyKey();setTiles('dark');cl();toast('Map key removed')}};
 q('#cmLy').onclick=()=>{const ks=Object.keys(TL),n=ks[(ks.indexOf(tk)+1)%ks.length];setTiles(n);toast('Map style: '+TL[n][3])};
 q('#cmStb').onclick=()=>q('#cmBody').classList.toggle('open');q('#cmBody').addEventListener('click',e=>{if(e.target===q('#cmBody'))q('#cmBody').classList.remove('open')});
 q('#cmAuto').onclick=()=>{rm=RM[(RM.indexOf(rm)+1)%RM.length];startR();paintSync();toast(rm==='live'?'Real-time updates on':rm==='off'?'Auto-refresh paused':'Refreshing every '+rm+' seconds')};
@@ -909,18 +1089,18 @@ const s=await P,ids=s.docs.map(d=>d.id),jobs=[];
 for(let k=0;k<ids.length;k+=250){const w=writeBatch(fs);ids.slice(k,k+250).forEach(id=>{w.delete(doc(fs,'vehicles',id,'private','d'));w.delete(doc(fs,'vehicles',id))});jobs.push(w.commit())}
 const w=writeBatch(fs);w.delete(doc(fs,'imports',i.id));jobs.push(w.commit());
 await Promise.all(jobs);log({type:'delete-import',term:i.file,count:ids.length});toast('Deleted '+ids.length+' records');vImp()}catch(er){E(er);vImp()}};
-$('#f').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const csv=/\.csv$/i.test(f.name),wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellText:true,raw:csv});I={file:f.name,sheets:wb.SheetNames.map(n=>{const r=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''});const h=(r[0]||[]).map(String);return{n,h,rows:r.slice(1).filter(x=>x.some(c=>String(c).trim())),m:autoMap(h)}}),cur:0};mapView()}catch{toast('Could not read this file',true)}}}
-function mapView(){const s=I.sheets[I.cur];$('#ib').innerHTML=`<p>Sheet: <select id="sh">${I.sheets.map((x,i)=>`<option value="${i}" ${i===I.cur?'selected':''}>${esc(x.n)} (${x.rows.length} rows)</option>`).join('')}</select></p><p class="mut sm">Column mapping (auto-detected; change if wrong)</p>${FIELDS.map(f=>f[3]?`<div class="row"><span class="grow sm">${f[1]}<br><span class="mut">Ctrl/Shift+click to select several columns</span></span><select data-f="${f[0]}" multiple size="4" class="grow">${s.h.map((h,i)=>`<option value="${i}" ${(s.m[f[0]]||[]).includes(i)?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`:`<div class="row"><span class="grow sm">${f[1]}</span><select data-f="${f[0]}" class="grow"><option value="">— not mapped —</option>${s.h.map((h,i)=>`<option value="${i}" ${s.m[f[0]]===i?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`).join('')}<p class="mut sm">Preview</p>${tbl(s.h,s.rows.slice(0,5))}<button class="btn full" id="va">Validate</button><div id="vr"></div>`;
+$('#f').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const wb=await readBook(f),fin=await pickFinance(f.name);I={file:f.name,fin,sheets:wb.SheetNames.map(n=>{const r=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''});const h=(r[0]||[]).map(String);return{n,h,rows:r.slice(1).filter(x=>x.some(c=>String(c).trim())),m:autoMap(h)}}),cur:0};mapView()}catch(er){bookErr(er,'#f')}}}
+function mapView(){const s=I.sheets[I.cur];$('#ib').innerHTML=`<p>Sheet: <select id="sh">${I.sheets.map((x,i)=>`<option value="${i}" ${i===I.cur?'selected':''}>${esc(x.n)} (${x.rows.length} rows)</option>`).join('')}</select></p><p class="mut sm">Column mapping (auto-detected; change if wrong)</p>${FIELDS.map(f=>f[3]?`<div class="row"><span class="grow sm">${f[1]}<br><span class="mut">Ctrl/Shift+click to select several columns</span></span><select data-f="${f[0]}" multiple size="4" class="grow">${s.h.map((h,i)=>`<option value="${i}" ${(s.m[f[0]]||[]).includes(i)?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`:`<div class="row"><span class="grow sm">${f[1]}</span><select data-f="${f[0]}" class="grow"><option value="">— not mapped —</option>${s.h.map((h,i)=>`<option value="${i}" ${s.m[f[0]]===i?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`).join('')}<div class="row"><span class="grow sm">Finance for this file<br><span class="mut">Used when the file has no finance column, or the cell is empty</span></span><input id="vfin" class="grow" list="finl" placeholder="e.g. HDFC Bank" value="${esc(I.fin||'')}"><datalist id="finl">${finSaved().map(x=>`<option value="${esc(x)}">`).join('')}</datalist></div><p class="mut sm">Preview</p>${tbl(s.h,s.rows.slice(0,5))}<button class="btn full" id="va">Validate</button><div id="vr"></div>`;
 $('#sh').onchange=e=>{I.cur=+e.target.value;mapView()};$('#ib').querySelectorAll('[data-f]').forEach(x=>x.onchange=()=>{s.m={};$('#ib').querySelectorAll('[data-f]').forEach(y=>{if(y.multiple){const a=[...y.selectedOptions].map(o=>+o.value);if(a.length)s.m[y.dataset.f]=a}else if(y.value!=='')s.m[y.dataset.f]=+y.value})});$('#va').onclick=()=>validate().catch(E)}
 // checks Firestore for records already stored under the same registration (doc id), chassis or engine number
 async function existBatch(c){const q=async(f,vals)=>{vals=[...new Set(vals.filter(Boolean))];return vals.length?(await getDocs(query(col('vehicles'),where(f,'in',vals)))).docs:[]};
 const [a,b,d]=await Promise.all([q(documentId(),c.map(r=>r.id)),q('chassisNorm',c.map(r=>r.chassisNorm)),q('engineNorm',c.map(r=>r.engineNorm))]);
 const ids=new Set(a.map(x=>x.id)),ch=new Map(b.map(x=>[x.data().chassisNorm,x.id])),en=new Map(d.map(x=>[x.data().engineNorm,x.id]));
 c.forEach(r=>{r.ex=ids.has(r.id)?r.id:(r.chassisNorm&&ch.get(r.chassisNorm))||(r.engineNorm&&en.get(r.engineNorm))||null})}
-async function validate(){const s=I.sheets[I.cur],m=s.m;if(!('regNo'in m||'chassisNo'in m||'engineNo'in m))return toast('Map at least one of Registration, Chassis or Engine number',true);
+async function validate(){const s=I.sheets[I.cur],m=s.m;const fin=($('#vfin')||{value:''}).value.trim();I.fin=fin;saveFin(fin);if(!('regNo'in m||'chassisNo'in m||'engineNo'in m))return toast('Map at least one of Registration, Chassis or Engine number',true);
 const g=(r,f)=>f in m?String(r[m[f]]??'').trim():'',gl=(r,f)=>f in m?[].concat(m[f]).map(c=>String(r[c]??'').trim()).filter(Boolean):[],uniq=(a,key)=>{const z=new Set();return a.filter(x=>{const k=key(x);if(!k||z.has(k))return false;z.add(k);return true})},seen=new Set(),recs=[];let miss=0,dupF=0;const now=Date.now();
 for(const r of s.rows){const reg=g(r,'regNo'),ch=g(r,'chassisNo'),en=g(r,'engineNo'),id=norm(reg)||norm(ch)||norm(en);if(!id){miss++;continue}if(seen.has(id)){dupF++;continue}seen.add(id);
-recs.push({id,regNo:reg,regNorm:norm(reg),chassisNo:ch,chassisNorm:norm(ch),engineNo:en,engineNorm:norm(en),make:g(r,'make'),model:g(r,'model'),financer:g(r,'financer'),customerName:g(r,'customerName'),loanNo:g(r,'loanNo'),pos:g(r,'pos'),emi:g(r,'emi'),bkt:g(r,'bkt'),mobiles:uniq(gl(r,'mobile').flatMap(x=>x.split(/[,;\/\n]+|\s{2,}/)).map(x=>x.trim()),x=>x.replace(/\D/g,'').length>=6?x.replace(/\D/g,'').slice(-10):''),addresses:uniq(gl(r,'address'),x=>x.toLowerCase()),source:I.file,importedAt:now,updatedAt:now,active:true,regTokens:tokens(reg),chassisTokens:tokens(ch),engineTokens:tokens(en)})}
+recs.push({id,regNo:reg,regNorm:norm(reg),chassisNo:ch,chassisNorm:norm(ch),engineNo:en,engineNorm:norm(en),make:g(r,'make'),model:g(r,'model'),financer:g(r,'financer')||fin,customerName:g(r,'customerName'),loanNo:g(r,'loanNo'),pos:g(r,'pos'),emi:g(r,'emi'),bkt:g(r,'bkt'),mobiles:uniq(gl(r,'mobile').flatMap(x=>x.split(/[,;\/\n]+|\s{2,}/)).map(x=>x.trim()),x=>x.replace(/\D/g,'').length>=6?x.replace(/\D/g,'').slice(-10):''),addresses:uniq(gl(r,'address'),x=>x.toLowerCase()),source:I.file,importedAt:now,updatedAt:now,active:true,regTokens:tokens(reg),chassisTokens:tokens(ch),engineTokens:tokens(en)})}
 $('#vr').innerHTML='<p>Checking existing records… <progress id="pg"></progress></p>';$('#pg').max=recs.length;
 for(let i=0;i<recs.length;i+=240){await Promise.all([0,1,2,3,4,5,6,7].map(k=>recs.slice(i+k*30,i+k*30+30)).filter(c=>c.length).map(existBatch));$('#pg').value=Math.min(i+240,recs.length)}
 const dupDb=recs.filter(r=>r.ex).length;I.recs=recs;I.stat={total:s.rows.length,miss,dupF,dupDb};
@@ -961,19 +1141,60 @@ try{localStorage.setItem(lrk(),JSON.stringify([raw,...lrecents().filter(x=>x!==r
 log({type:'loan-search',term:raw,count:LN.res.length});renderLoans()}catch(e){$('#lres').innerHTML='';E(e)}}
 function renderLoans(){const b=$('#lres'),hr=document.querySelector('.hero');if(hr)hr.style.display=LN.searched?'none':'';if(!LN.searched){b.innerHTML='';return}
 if(!LN.res.length){b.innerHTML=`<div class="empty">${ic('file')}<h3>No loan found</h3><p class="mut">No matching loan record was found for your search.<br>Please verify the loan number or customer name and try again.</p></div>`;return}
-const types=[...new Set(LN.res.map(x=>x.loanType).filter(Boolean))].sort(),r=LN.res.filter(x=>!LN.type||x.loanType===LN.type);
-b.innerHTML=`<div class="rh"><div><span class="mut">Search</span> <b>${esc(LN.term)}</b> &nbsp;<span class="pill ok">${r.length} result${r.length>1?'s':''} found</span></div>${types.length>1?`<select id="lty"><option value="">All loan types</option>${types.map(x=>`<option ${LN.type===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`:''}</div><div class="rl">`+r.slice(0,LN.shown).map(x=>`<button class="rli" data-ln="${esc(x.id)}"><span style="font:700 1rem/1.3 Manrope,sans-serif;letter-spacing:.01em;text-align:left;padding:8px 0">${esc(x.customerName||'—')}<br><small style="font-size:.8rem;font-weight:600;color:var(--mut);letter-spacing:0">${esc(x.loanNo||x.id)}${x.loanType?' · '+esc(x.loanType):''}</small></span><i>›</i></button>`).join('')+`</div>`+(r.length>LN.shown?'<button class="btn ghost full" id="lmore">Show more ('+(r.length-LN.shown)+' left)</button>':'');
+const types=[...new Set(LN.res.map(x=>loanBank(x)).filter(Boolean))].sort(),r=LN.res.filter(x=>!LN.type||bankKey(loanBank(x))===bankKey(LN.type));
+b.innerHTML=`<div class="rh"><div><span class="mut">Search</span> <b>${esc(LN.term)}</b> &nbsp;<span class="pill ok">${r.length} result${r.length>1?'s':''} found</span></div>${types.length>1?`<select id="lty"><option value="">All banks</option>${types.map(x=>`<option ${LN.type===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`:''}</div><div class="lgrid">`+r.slice(0,LN.shown).map(loanCard).join('')+`</div>`+(r.length>LN.shown?'<button class="btn ghost full" id="lmore">Show more ('+(r.length-LN.shown)+' left)</button>':'');
 const t=$('#lty');if(t)t.onchange=e=>{LN.type=e.target.value;LN.shown=60;renderLoans()}}
 async function loanDetail(id){try{const s=await gdoc(doc(fs,'loans',id));if(!s.exists())return;const v={id,...s.data()};log({type:'loan-open',term:v.loanNo||id});
 const d=x=>x?new Date(x).toLocaleString():'',kv=(l,val)=>val?`<div class="kv"><span class="mut">${esc(l)}</span><span>${esc(val)}</span></div>`:'';
 const mobs=(v.mobiles||[]).filter(Boolean),adds=(v.addresses||[]).filter(Boolean),fl=(v.fields||[]).filter(x=>x&&x.v),n=a=>a.length>1;
-const L=[],add=(k,x)=>{if(x)L.push(k+': '+x)};add('Loan Type',v.loanType);add('Loan No',v.loanNo);add('Customer',v.customerName);fl.forEach(x=>add(x.k,x.v));mobs.forEach((m,i)=>add('Mobile'+(n(mobs)?' '+(i+1):''),m));adds.forEach((a,i)=>add('Address'+(n(adds)?' '+(i+1):''),a));add('Uploaded',d(v.importedAt||v.updatedAt));
+const L=[],add=(k,x)=>{if(x)L.push(k+': '+x)};add('Bank',loanBank(v));add('Loan Type',v.loanType);add('Loan No',v.loanNo);add('Customer',v.customerName);fl.forEach(x=>add(x.k,x.v));mobs.forEach((m,i)=>add('Mobile'+(n(mobs)?' '+(i+1):''),m));adds.forEach((a,i)=>add('Address'+(n(adds)?' '+(i+1):''),a));add('Uploaded',d(v.importedAt||v.updatedAt));
 const txt=trace('*INFINITY VISION*\n'+L.join('\n'));
 const card={kind:'LOAN',plate:String(v.loanNo||v.id),file:'loan-'+(v.loanNo||v.id),cap:'*INFINITY VISION*\nLoan No: '+(v.loanNo||v.id),secs:[['Loan details',[['Loan Type',v.loanType],['Loan No',v.loanNo],['Customer',v.customerName],...fl.map(x=>[x.k,x.v])]],['Contact',mobs.map((x,i)=>['Mobile'+(n(mobs)?' '+(i+1):''),x])],['Address',adds.map((x,i)=>['Address'+(n(adds)?' '+(i+1):''),x])],['Database',[['Uploaded',d(v.importedAt||v.updatedAt)]]]]};
-const o=document.createElement('div');o.className='ov';o.innerHTML=`<div class="box"><span class="plate" style="max-width:100%"><i>LOAN</i><b style="font-size:1.25rem;letter-spacing:.08em;word-break:break-all">${esc(v.loanNo||v.id)}</b></span><div class="row" style="margin:14px 0 0"><button class="btn grow" data-act="all">Copy all</button><button class="btn grow wa" data-act="wa">Share on WhatsApp</button></div><h4>Loan details</h4>${kv('Loan Type',v.loanType)}${kv('Loan Number',v.loanNo)}${kv('Customer Name',v.customerName)}${fl.map(x=>kv(x.k,x.v)).join('')}${mobs.length?'<h4>Contact</h4>'+mobs.map((m,i)=>kv('Customer Mobile No'+(n(mobs)?' '+(i+1):''),m).replace('</span></div>',` <a class="btn sm2" style="text-decoration:none" href="tel:${esc(m)}">Call</a></span></div>`)).join(''):''}${adds.length?'<h4>Address</h4>'+adds.map((a,i)=>`<div class="kv" style="flex-direction:column;align-items:stretch"><span class="mut">Address${n(adds)?' '+(i+1):''}</span><span style="text-align:left;word-break:normal;font-weight:600">${esc(a)}</span><div class="row"><a class="btn ghost sm2" style="text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a)}">Open in Maps</a></div></div>`).join(''):''}${docsBox()}<h4>Database information</h4>${kv('Date uploaded',d(v.importedAt||v.updatedAt))}<button class="btn full ghost" id="x" style="margin-top:14px">Close</button></div>`;
+const bank=loanBank(v),kf=keyFields(v,4),kfs=new Set(kf),rest=fl.filter(x=>!kfs.has(x)),vt=v.loanType&&bankKey(v.loanType)!==bankKey(bank)?v.loanType:'';
+const sec=(t,h)=>h?`<div class="ld-sec"><h4>${t}</h4>${h}</div>`:'';
+const o=document.createElement('div');o.className='ov';o.innerHTML=`<div class="box ld"><div class="ld-head"><span class="lc-av lg" style="--h:${bHue(bankKey(bank||v.customerName))}">${esc(bIni(bank||v.customerName))}</span><div class="ld-t"><small>LOAN ACCOUNT</small><b>${esc(v.customerName||'—')}</b><span class="ld-no">${esc(v.loanNo||v.id)}</span></div></div>${bank||vt?`<div class="ld-tags">${bank?`<span class="lc-bank">${esc(bank)}</span>`:''}${vt?`<span class="lc-type">${esc(vt)}</span>`:''}</div>`:''}${kf.length?`<div class="ld-tiles">${kf.map(x=>`<div><span>${esc(x.k)}</span><b>${esc(x.v)}</b></div>`).join('')}</div>`:''}<div class="row" style="margin:16px 0 0"><button class="btn grow" data-act="all">Copy all</button><button class="btn grow wa" data-act="wa">Share on WhatsApp</button></div>${sec('Loan details',kv('Bank / Financer',bank)+kv('Loan Type',vt)+kv('Loan Number',v.loanNo)+kv('Customer Name',v.customerName)+rest.map(x=>kv(x.k,x.v)).join(''))}${sec('Contact',mobs.map((m,i)=>kv('Customer Mobile No'+(n(mobs)?' '+(i+1):''),m).replace('</span></div>',` <a class="btn sm2" style="text-decoration:none" href="tel:${esc(m)}">Call</a></span></div>`)).join(''))}${sec('Address',adds.map((a,i)=>`<div class="kv" style="flex-direction:column;align-items:stretch"><span class="mut">Address${n(adds)?' '+(i+1):''}</span><span style="text-align:left;word-break:normal;font-weight:600">${esc(a)}</span><div class="row"><a class="btn ghost sm2" style="text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a)}">Open in Maps</a></div></div>`).join(''))}${docsBox()}${sec('Database information',kv('Date uploaded',d(v.importedAt||v.updatedAt)))}<button class="btn full ghost" id="x" style="margin-top:14px">Close</button></div>`;
 document.body.appendChild(o);guard(o);docsInit(o,'l:'+id,'loan',id,v.loanNo||id);o.onclick=e=>{if(e.target===o||e.target.id==='x')o.remove();const a=e.target.closest('[data-act]');if(a){if(a.dataset.act==='all'){copy(txt);log({type:'loan-copy-all',term:v.loanNo||id})}else{waShare(card,txt);log({type:'loan-share-whatsapp',term:v.loanNo||id})}}}}catch(e){E(e)}}
+
+/* ---------- loan helpers: bank detection, cards ---------- */
+const BANKRE=/^(bank|bank ?name|financer|financier|financer ?name|financier ?name|finance|lender|nbfc|finance ?company|client|client ?name|company)$/i;
+const loanBank=v=>{if(!v)return'';if(v.bank)return String(v.bank).trim();const f=(v.fields||[]).find(x=>x&&x.v&&BANKRE.test(String(x.k).trim()));return f?String(f.v).trim():String(v.loanType||'').trim()};
+const bankKey=s=>String(s||'').trim().toUpperCase().replace(/\s+/g,' ');
+const bHue=s=>{let h=0;for(const c of String(s||'?'))h=(h*31+c.charCodeAt(0))%360;return h};
+const bIni=s=>{const w=String(s||'?').replace(/[^A-Za-z0-9 ]/g,' ').trim().split(/\s+/).filter(Boolean);return((w[0]||'?')[0]+(w[1]?w[1][0]:(w[0]||'')[1]||'')).toUpperCase()};
+const KEYSLOTS=[/finance.*(amount|amt)|loan.*(amount|amt)/i,/^emi|emi.*(amount|amt)/i,/principal.*(outstanding|os)|^pos$|^outstanding/i,/bucket|^bkt/i];
+const keyFields=(v,n)=>{const f=(v.fields||[]).filter(x=>x&&x.v!==''&&x.v!=null),out=[];KEYSLOTS.forEach(re=>{const x=f.find(y=>re.test(String(y.k).trim())&&!out.includes(y));if(x)out.push(x)});return out.slice(0,n)};
+const loanCard=x=>{const b=loanBank(x),kf=keyFields(x,4),ph=(x.mobiles||[]).filter(Boolean)[0],t=x.loanType&&bankKey(x.loanType)!==bankKey(b)?x.loanType:'';
+return `<button class="lcard" data-ln="${esc(x.id)}"><div class="lc-top"><span class="lc-av" style="--h:${bHue(bankKey(b||x.customerName))}">${esc(bIni(b||x.customerName))}</span><div class="lc-id"><b>${esc(x.customerName||'—')}</b><small>${esc(x.loanNo||x.id)}</small></div><i>›</i></div>${b||t?`<div class="lc-tags">${b?`<span class="lc-bank">${esc(b)}</span>`:''}${t?`<span class="lc-type">${esc(t)}</span>`:''}</div>`:''}${kf.length?`<div class="lc-meta">${kf.map(f=>`<div><span>${esc(f.k)}</span><b>${esc(f.v)}</b></div>`).join('')}</div>`:''}${ph?`<div class="lc-ph" data-call="${esc(ph)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>${esc(ph)}</span></div>`:''}</button>`};
+document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('[data-call]');if(c){e.preventDefault();e.stopPropagation();location.href='tel:'+c.dataset.call}},true);
+
+/* ---------- all loans (browse everything, filter by bank) ---------- */
+let LA={uid:null,rows:[],last:null,done:false,loading:false,bank:'',q:'',shown:60,total:null,imp:null,bk:''};
+async function vLoanAll(){if(!canLoans())return lNo();
+if(LA.uid!==S.u.uid)LA={uid:S.u.uid,rows:[],last:null,done:false,loading:false,bank:'',q:'',shown:60,total:null,imp:null,bk:''};
+$('#main').innerHTML=`<div class="ph"><h2>All loans</h2><p class="mut" id="lac"></p></div><div class="card sc lfb"><div class="lfb-h"><span class="lfb-ic">${ic('loan')}</span><div><b>Filter by bank</b><small class="mut">Pick a bank / financer to see only its loans, or keep All banks</small></div></div><div class="lfb-row"><div><label for="lab">Bank / Financer</label><select id="lab"><option value="">All banks</option></select></div><div><label for="laq">Find in this list</label><input id="laq" type="search" placeholder="Customer name or loan number" autocomplete="off" value="${esc(LA.q)}"></div></div><div class="lfb-chips" id="lach"></div></div><div id="lal"></div>`;
+if(LA.total===null)lcount().then(n=>{LA.total=n;laPaint()}).catch(()=>{});
+if(LA.imp===null){try{LA.imp=(await gd(query(col('loanImports'),orderBy('at','desc'),limit(50)))).docs.flatMap(d=>d.data().banks||[])}catch{LA.imp=[]}}
+$('#lab').onchange=e=>{LA.bank=e.target.value;LA.shown=60;laPaint()};
+let tm;$('#laq').oninput=e=>{clearTimeout(tm);tm=setTimeout(()=>{LA.q=e.target.value;LA.shown=60;laPaint()},200)};
+$('#main').onclick=e=>{const c=e.target.closest('[data-ln]');if(c)return loanDetail(c.dataset.ln);const ch=e.target.closest('[data-bk]');if(ch){LA.bank=ch.dataset.bk;LA.shown=60;return laPaint()}if(e.target.closest('#lasm')){LA.shown+=60;return laPaint()}if(e.target.closest('#lam'))laMore()};
+if(!LA.rows.length&&!LA.done)await laMore();else laPaint()}
+async function laMore(){if(LA.loading||LA.done)return;LA.loading=true;laPaint();
+try{const q=LA.last?query(col('loans'),orderBy(documentId()),startAfter(LA.last),limit(300)):query(col('loans'),orderBy(documentId()),limit(300));const s=await gd(q);
+s.docs.forEach(d=>LA.rows.push({id:d.id,...d.data()}));if(s.docs.length)LA.last=s.docs[s.docs.length-1];if(s.docs.length<300)LA.done=true}catch(e){E(e);LA.done=true}
+LA.loading=false;laPaint()}
+function laBanks(){const m=new Map();(LA.imp||[]).forEach(b=>{const k=bankKey(b);if(k&&!m.has(k))m.set(k,String(b).trim())});LA.rows.forEach(x=>{const b=loanBank(x),k=bankKey(b);if(k&&!m.has(k))m.set(k,b)});return[...m.values()].sort((a,b)=>a.localeCompare(b,'en',{sensitivity:'base'}))}
+function laList(){const bk=bankKey(LA.bank),qs=LA.q.trim().toUpperCase(),qn=norm(LA.q);return LA.rows.filter(x=>x.active!==false&&(!bk||bankKey(loanBank(x))===bk)&&(!qs||String(x.customerName||'').toUpperCase().includes(qs)||(qn&&norm(x.loanNo||x.id).includes(qn))))}
+function laPaint(){const el=$('#lal');if(!el)return;const list=laList(),filt=LA.bank||LA.q.trim(),ac=$('#lac'),banks=laBanks();
+const key=banks.join('|')+'#'+LA.bank;if(key!==LA.bk){LA.bk=key;const sel=$('#lab');if(sel){sel.innerHTML='<option value="">All banks</option>'+banks.map(b=>`<option value="${esc(b)}">${esc(b)}</option>`).join('');sel.value=LA.bank}
+const ch=$('#lach');if(ch)ch.innerHTML=banks.length?`<button class="chip ${LA.bank?'':'on'}" data-bk="">All banks</button>`+banks.map(b=>`<button class="chip ${bankKey(b)===bankKey(LA.bank)?'on':''}" data-bk="${esc(b)}">${esc(b)}</button>`).join(''):''}
+if(ac)ac.textContent=filt?`${list.length} loan${list.length===1?'':'s'}${LA.bank?' in '+LA.bank:''}${LA.q.trim()?' matching “'+LA.q.trim()+'”':''}${LA.done?'':' so far'}`:`Showing ${list.length}${LA.total!==null?' of '+LA.total.toLocaleString():''} loans`;
+if(filt&&!LA.done&&!LA.loading&&list.length<LA.shown){setTimeout(laMore,0)}
+el.innerHTML=(list.length?`<div class="lgrid">${list.slice(0,LA.shown).map(loanCard).join('')}</div>`:(LA.loading?skel(6):(LA.done?`<div class="empty">${ic('file')}<h3>No loans found</h3><p class="mut">No loan matches this filter.${LA.bank?'<br>Try choosing “All banks”.':''}</p></div>`:'')))
++(list.length>LA.shown?`<button class="btn ghost full" id="lasm">Show more (${list.length-LA.shown} left)</button>`:(!LA.done?`<button class="btn ghost full" id="lam">${LA.loading?'Loading…':'Load more'}</button>`:''));
+const am=$('#lam');if(am&&!filt&&'IntersectionObserver'in window){new IntersectionObserver((en,ob)=>{if(en[0].isIntersecting){ob.disconnect();laMore()}},{rootMargin:'400px'}).observe(am)}}
+
 /* ---------- loan import (Excel / CSV, separate from the vehicle import) ---------- */
-const LF=[['loanNo','Loan Number (required)',['loanno','loannumber','loanaccountnumber','loanaccountno','loanacno','loanaccount','loanid','agreementno','agreementnumber','lan','accountno','accountnumber','contractno']],['customerName','Customer Name',['customername','customer','name','borrower','borrowername','custname','applicantname','applicant','clientname']],['loanType','Loan Type (column in the file)',['loantype','typeofloan','product','producttype','productname','scheme','loanproduct','loancategory','category']],['mobile','Customer Mobile No (add as many columns as needed)',['mobileno','mobile','mobilenumber','phone','phoneno','phonenumber','contactno','contactnumber','contact','customermobile','customermobileno','altmobile','altmobileno','alternatemobile','alternatemobileno','alternatephone','altphone','cell'],1],['address','Address (add as many columns as needed)',['address','customeraddress','residenceaddress','residentialaddress','officeaddress','permanentaddress','currentaddress','alternateaddress','altaddress'],1]];
+const LF=[['loanNo','Loan Number (required)',['loanno','loannumber','loanaccountnumber','loanaccountno','loanacno','loanaccount','loanid','agreementno','agreementnumber','lan','accountno','accountnumber','contractno']],['customerName','Customer Name',['customername','customer','name','borrower','borrowername','custname','applicantname','applicant','clientname']],['bank','Bank / Financer (column in the file)',['bank','bankname','financer','financername','financier','financiername','lender','lendername','nbfc','financecompany','financeco','client','clientname']],['loanType','Loan Type (column in the file)',['loantype','typeofloan','product','producttype','productname','scheme','loanproduct','loancategory','category']],['mobile','Customer Mobile No (add as many columns as needed)',['mobileno','mobile','mobilenumber','phone','phoneno','phonenumber','contactno','contactnumber','contact','customermobile','customermobileno','altmobile','altmobileno','alternatemobile','alternatemobileno','alternatephone','altphone','cell'],1],['address','Address (add as many columns as needed)',['address','customeraddress','residenceaddress','residentialaddress','officeaddress','permanentaddress','currentaddress','alternateaddress','altaddress'],1]];
 const lAutoMap=h=>{const m={};h.forEach((x,i)=>{const k=String(x).toLowerCase().replace(/[^a-z0-9]/g,''),kb=k.replace(/\d+$/,'');for(const f of LF){if(f[3]){if(f[2].includes(kb)||f[2].includes(k)){(m[f[0]]=m[f[0]]||[]).push(i);break}}else if(!(f[0] in m)&&f[2].includes(k)){m[f[0]]=i;break}}});return m};
 let LI=null;
 async function vLimp(){if(S.u.role!=='admin')return lNo();const h=(await getDocs(query(col('loanImports'),orderBy('at','desc'),limit(50)))).docs.map(d=>({id:d.id,...d.data()}));
@@ -988,16 +1209,16 @@ const s=await P,ids=s.docs.map(d=>d.id),jobs=[];
 for(let k=0;k<ids.length;k+=450){const w=writeBatch(fs);ids.slice(k,k+450).forEach(id=>w.delete(doc(fs,'loans',id)));jobs.push(w.commit())}
 const w=writeBatch(fs);w.delete(doc(fs,'loanImports',i.id));jobs.push(w.commit());
 await Promise.all(jobs);log({type:'delete-loan-import',term:i.file,count:ids.length});toast('Deleted '+ids.length+' records');vLimp()}catch(er){E(er);vLimp()}};
-$('#lf').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const csv=/\.csv$/i.test(f.name),wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellText:true,raw:csv});LI={file:f.name,sheets:wb.SheetNames.map(n=>{const r=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''});const h=(r[0]||[]).map(String);return{n,h,rows:r.slice(1).filter(x=>x.some(c=>String(c).trim())),m:lAutoMap(h)}}),cur:0,ft:''};lMapView()}catch{toast('Could not read this file',true)}}}
-function lMapView(){const s=LI.sheets[LI.cur];$('#lib').innerHTML=`<p>Sheet: <select id="lsh">${LI.sheets.map((x,i)=>`<option value="${i}" ${i===LI.cur?'selected':''}>${esc(x.n)} (${x.rows.length} rows)</option>`).join('')}</select></p><p class="mut sm">Column mapping (auto-detected; change if wrong)</p>${LF.map(f=>f[3]?`<div class="row"><span class="grow sm">${f[1]}<br><span class="mut">Ctrl/Shift+click to select several columns</span></span><select data-lf="${f[0]}" multiple size="4" class="grow">${s.h.map((h,i)=>`<option value="${i}" ${(s.m[f[0]]||[]).includes(i)?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`:`<div class="row"><span class="grow sm">${f[1]}</span><select data-lf="${f[0]}" class="grow"><option value="">— not mapped —</option>${s.h.map((h,i)=>`<option value="${i}" ${s.m[f[0]]===i?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`).join('')}<div class="row"><span class="grow sm">Loan type for all rows<br><span class="mut">Used when the file has no loan type column, or the cell is empty</span></span><input id="lft" class="grow" list="lfl" placeholder="e.g. Personal Loan" value="${esc(LI.ft||'')}"><datalist id="lfl"><option value="Personal Loan"><option value="Business Loan"><option value="Home Loan"><option value="Loan Against Property"><option value="Gold Loan"><option value="Other"></datalist></div><p class="mut sm">All other columns in the file are saved and shown on the loan card.</p>${tbl(s.h,s.rows.slice(0,5))}<button class="btn full" id="lva">Validate</button><div id="lvr"></div>`;
+$('#lf').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const wb=await readBook(f),fin=await pickFinance(f.name);LI={file:f.name,fb:fin,sheets:wb.SheetNames.map(n=>{const r=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''});const h=(r[0]||[]).map(String);return{n,h,rows:r.slice(1).filter(x=>x.some(c=>String(c).trim())),m:lAutoMap(h)}}),cur:0,ft:''};lMapView()}catch(er){bookErr(er,'#lf')}}}
+function lMapView(){const s=LI.sheets[LI.cur];$('#lib').innerHTML=`<p>Sheet: <select id="lsh">${LI.sheets.map((x,i)=>`<option value="${i}" ${i===LI.cur?'selected':''}>${esc(x.n)} (${x.rows.length} rows)</option>`).join('')}</select></p><p class="mut sm">Column mapping (auto-detected; change if wrong)</p>${LF.map(f=>f[3]?`<div class="row"><span class="grow sm">${f[1]}<br><span class="mut">Ctrl/Shift+click to select several columns</span></span><select data-lf="${f[0]}" multiple size="4" class="grow">${s.h.map((h,i)=>`<option value="${i}" ${(s.m[f[0]]||[]).includes(i)?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`:`<div class="row"><span class="grow sm">${f[1]}</span><select data-lf="${f[0]}" class="grow"><option value="">— not mapped —</option>${s.h.map((h,i)=>`<option value="${i}" ${s.m[f[0]]===i?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`).join('')}<div class="row"><span class="grow sm">Finance for this file<br><span class="mut">Used when the file has no bank column, or the cell is empty</span></span><input id="lfb" class="grow" list="finl" placeholder="e.g. HDFC Bank" value="${esc(LI.fb||'')}"><datalist id="finl">${finSaved().map(x=>`<option value="${esc(x)}">`).join('')}</datalist></div><div class="row"><span class="grow sm">Loan type for all rows<br><span class="mut">Used when the file has no loan type column, or the cell is empty</span></span><input id="lft" class="grow" list="lfl" placeholder="e.g. Personal Loan" value="${esc(LI.ft||'')}"><datalist id="lfl"><option value="Personal Loan"><option value="Business Loan"><option value="Home Loan"><option value="Loan Against Property"><option value="Gold Loan"><option value="Other"></datalist></div><p class="mut sm">All other columns in the file are saved and shown on the loan card.</p>${tbl(s.h,s.rows.slice(0,5))}<button class="btn full" id="lva">Validate</button><div id="lvr"></div>`;
 $('#lsh').onchange=e=>{LI.cur=+e.target.value;LI.ft=$('#lft').value;lMapView()};$('#lib').querySelectorAll('[data-lf]').forEach(x=>x.onchange=()=>{s.m={};$('#lib').querySelectorAll('[data-lf]').forEach(y=>{if(y.multiple){const a=[...y.selectedOptions].map(o=>+o.value);if(a.length)s.m[y.dataset.lf]=a}else if(y.value!=='')s.m[y.dataset.lf]=+y.value})});$('#lva').onclick=()=>lValidate().catch(E)}
 async function lExist(c){const ids=[...new Set(c.map(r=>r.id))];const e=new Set(ids.length?(await getDocs(query(col('loans'),where(documentId(),'in',ids)))).docs.map(d=>d.id):[]);c.forEach(r=>{r.ex=e.has(r.id)?r.id:null})}
-async function lValidate(){const s=LI.sheets[LI.cur],m=s.m;if(!('loanNo'in m))return toast('Map the Loan Number column',true);const ft=$('#lft').value.trim();LI.ft=ft;
+async function lValidate(){const s=LI.sheets[LI.cur],m=s.m;if(!('loanNo'in m))return toast('Map the Loan Number column',true);const ft=$('#lft').value.trim();LI.ft=ft;const fb=($('#lfb')||{value:''}).value.trim();LI.fb=fb;saveFin(fb);
 const g=(r,f)=>f in m?String(r[m[f]]??'').trim():'',gl=(r,f)=>f in m?[].concat(m[f]).map(c=>String(r[c]??'').trim()).filter(Boolean):[],uniq=(a,key)=>{const z=new Set();return a.filter(x=>{const k=key(x);if(!k||z.has(k))return false;z.add(k);return true})},mapped=new Set();Object.values(m).forEach(v=>[].concat(v).forEach(c=>mapped.add(c)));
 const seen=new Set(),recs=[];let miss=0,dupF=0;const now=Date.now();
 for(const r of s.rows){const ln=g(r,'loanNo'),id=norm(ln);if(!id){miss++;continue}if(seen.has(id)){dupF++;continue}seen.add(id);const nm=g(r,'customerName'),fields=[];
 s.h.forEach((h,i)=>{if(mapped.has(i))return;const v=String(r[i]??'').trim();if(v)fields.push({k:h||('Column '+(i+1)),v})});
-recs.push({id,loanNo:ln,loanNorm:id,customerName:nm,loanType:g(r,'loanType')||ft,mobiles:uniq(gl(r,'mobile').flatMap(x=>x.split(/[,;\/\n]+|\s{2,}/)).map(x=>x.trim()),x=>x.replace(/\D/g,'').length>=6?x.replace(/\D/g,'').slice(-10):''),addresses:uniq(gl(r,'address'),x=>x.toLowerCase()),fields,source:LI.file,importedAt:now,updatedAt:now,active:true,loanTokens:tokens(ln),nameTokens:nameTokens(nm)})}
+recs.push({id,loanNo:ln,loanNorm:id,customerName:nm,loanType:g(r,'loanType')||ft,bank:g(r,'bank')||fb,mobiles:uniq(gl(r,'mobile').flatMap(x=>x.split(/[,;\/\n]+|\s{2,}/)).map(x=>x.trim()),x=>x.replace(/\D/g,'').length>=6?x.replace(/\D/g,'').slice(-10):''),addresses:uniq(gl(r,'address'),x=>x.toLowerCase()),fields,source:LI.file,importedAt:now,updatedAt:now,active:true,loanTokens:tokens(ln),nameTokens:nameTokens(nm)})}
 $('#lvr').innerHTML='<p>Checking existing records… <progress id="lpg"></progress></p>';$('#lpg').max=recs.length;
 for(let i=0;i<recs.length;i+=240){await Promise.all([0,1,2,3,4,5,6,7].map(k=>recs.slice(i+k*30,i+k*30+30)).filter(c=>c.length).map(lExist));$('#lpg').value=Math.min(i+240,recs.length)}
 const dupDb=recs.filter(r=>r.ex).length;LI.recs=recs;LI.stat={total:s.rows.length,miss,dupF,dupDb};
@@ -1007,7 +1228,7 @@ for(let i=0;i<recs.length;i+=400){const c=recs.slice(i,i+400),b=writeBatch(fs);l
 c.forEach(r=>{if(r.ex&&mode==='skip'){skip++;return}const id=r.ex||r.id,{ex,id:_i,...pub}=r;b.set(doc(fs,'loans',id),{...pub,importId:impId});n++});
 try{if(n)await b.commit();ok+=n}catch(e){fail+=n;if(String(e.code).includes('permission'))break}
 $('#lpg2').value=Math.min(i+400,recs.length)}
-const rep={importId:impId,file:LI.file,at:Date.now(),by:S.u.name,total:LI.stat.total,imported:ok,dups:LI.stat.dupF+skip,failed:fail+LI.stat.miss,status:fail?'Partial':'Completed'};try{await setDoc(impRef,rep)}catch(e){E(e)}log({type:'loan-import',term:LI.file,count:ok});
+const rep={importId:impId,banks:[...new Set(recs.map(r=>r.bank).filter(Boolean))].slice(0,300),file:LI.file,at:Date.now(),by:S.u.name,total:LI.stat.total,imported:ok,dups:LI.stat.dupF+skip,failed:fail+LI.stat.miss,status:fail?'Partial':'Completed'};try{await setDoc(impRef,rep)}catch(e){E(e)}log({type:'loan-import',term:LI.file,count:ok});
 $('#lip').innerHTML=`<div class="panel"><b>Import ${rep.status}</b><br>Imported: ${ok} · Skipped (existing): ${skip} · Duplicates in file: ${LI.stat.dupF} · Failed/missing: ${rep.failed}</div>`;toast('Import finished')}
 /* ---------- database ---------- */
 let DBL=[];
