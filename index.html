@@ -822,18 +822,18 @@ const rk=()=>'iv_recent_'+S.u.uid,recents=()=>{try{return JSON.parse(localStorag
 const fk=()=>'iv_fav_'+S.u.uid,favs=()=>{try{return JSON.parse(localStorage.getItem(fk())||'[]')}catch{return[]}},isFav=id=>favs().some(x=>x.id===id),toggleFav=(id,reg)=>{let a=favs();const on=!a.some(x=>x.id===id);a=on?[{id,reg},...a].slice(0,100):a.filter(x=>x.id!==id);try{localStorage.setItem(fk(),JSON.stringify(a))}catch{}return on};
 async function vSearch(){let n=0;try{n=await cn(col('vehicles'));if(navigator.onLine)try{localStorage.setItem('iv_off_n',n)}catch{}}catch(e){E(e)}const rec=recents(),fav=favs();
 $('#main').innerHTML=`<div class="hero"><div><span>Total vehicle records</span><b>${n.toLocaleString()}</b></div><button class="ghost2" id="rf">${ic('refresh')}Refresh</button></div><div class="card sc"><div class="seg">${Object.keys(KIND).map(k=>`<button data-k="${k}" class="${k===S.kind?'on':''}">${KIND[k][0]}</button>`).join('')}</div><div class="inp"><input id="q" placeholder="${KIND[S.kind][1]}" value="${esc(S.term)}" autocomplete="off" autocapitalize="characters" enterkeyhint="search"><button class="x" id="cl" aria-label="Clear">×</button></div><button class="btn full" id="sb">${ic('search')}Search</button>${fav.length?`<h4>Favourites</h4><div class="rl">${fav.map(f=>`<button class="rli" data-v="${esc(f.id)}"><span>★ ${esc(fmtReg(f.reg||f.id))}</span><i>›</i></button>`).join('')}</div>`:''}${rec.length?`<h4>Recent searches <button class="chip" id="clh" style="float:right;font-size:.75rem">Clear</button></h4><div class="chips">${rec.map(l=>`<button class="chip" data-k="${l.kind}" data-q="${esc(l.term)}">${esc(l.term)}</button>`).join('')}</div>`:''}</div><div id="res"></div>`;
-$('#sb').onclick=()=>doSearch();let lt;$('#q').oninput=()=>{clearTimeout(lt);const t=norm($('#q').value);if(t.length<3){SQ++;S.res=[];S.searched=false;S.term=$('#q').value.trim();$('#res').innerHTML='';const hr=document.querySelector('.hero');if(hr)hr.style.display='';return}lt=setTimeout(()=>doSearch(true),40)};$('#q').onkeydown=e=>{if(e.key==='Enter'){clearTimeout(lt);doSearch()}};$('#cl').onclick=()=>{S.term='';S.res=[];S.searched=false;vSearch()};$('#rf').onclick=()=>{S.res=[];S.searched=false;vSearch();toast('Refreshed')};
-$('#main').onclick=e=>{const k=e.target.closest('[data-k]');if(k&&k.classList.contains('chip')){S.kind=k.dataset.k;S.term=k.dataset.q;return vSearch().then(doSearch)}if(k){S.kind=k.dataset.k;S.term=$('#q').value;return vSearch().then(()=>{const i=$('#q');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}if(norm(S.term).length>=3)doSearch(true)})}const v=e.target.closest('[data-v]');if(v)return detail(v.dataset.v);if(e.target.id==='more'){S.shown+=60;renderRes()}};
+$('#sb').onclick=()=>doSearch();let lt;$('#q').oninput=()=>{clearTimeout(lt);const t=norm($('#q').value);if(t.length<1){SQ++;S.res=[];S.searched=false;S.term=$('#q').value.trim();$('#res').innerHTML='';const hr=document.querySelector('.hero');if(hr)hr.style.display='';return}lt=setTimeout(()=>doSearch(true),40)};$('#q').onkeydown=e=>{if(e.key==='Enter'){clearTimeout(lt);doSearch()}};$('#cl').onclick=()=>{S.term='';S.res=[];S.searched=false;vSearch()};$('#rf').onclick=()=>{S.res=[];S.searched=false;vSearch();toast('Refreshed')};
+$('#main').onclick=e=>{const k=e.target.closest('[data-k]');if(k&&k.classList.contains('chip')){S.kind=k.dataset.k;S.term=k.dataset.q;return vSearch().then(doSearch)}if(k){S.kind=k.dataset.k;S.term=$('#q').value;return vSearch().then(()=>{const i=$('#q');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}if(norm(S.term).length>=1)doSearch(true)})}const v=e.target.closest('[data-v]');if(v)return detail(v.dataset.v);if(e.target.id==='more'){S.shown+=60;renderRes()}};
 paintOff();const ch=$('#clh');if(ch)ch.onclick=()=>{try{localStorage.removeItem(rk())}catch{}vSearch()};if(S.res.length||S.searched)renderRes()}
 let SQ=0,recTm;const SC=new Map();
-async function doSearch(live){const raw=$('#q').value,t=norm(raw);if(t.length<3)return live?0:toast('Enter at least 3 characters',true);const my=++SQ,kind=S.kind,mk=kind+'|'+t;
+async function doSearch(live){const raw=$('#q').value,t=norm(raw);if(t.length<1)return live?0:toast('Enter a number to search',true);const my=++SQ,kind=S.kind,mk=kind+'|'+t;
 if(!live&&!$('#res').children.length||!S.searched&&!$('#res').children.length)$('#res').innerHTML=skel(6);
 const sig=d=>d.map(x=>x.id+':'+(x.updatedAt||'')).join(',');let shownSig=null;
 const apply=docs=>{S.term=raw.trim();S.res=docs.filter(v=>v.active!==false);S.shown=60;S.searched=true;sortRes();renderRes();shownSig=sig(docs)};
 const commit=()=>{try{localStorage.setItem(rk(),JSON.stringify([{kind,term:S.term},...recents().filter(x=>x.term!==S.term)].slice(0,20)))}catch{}log({type:'search',kind,term:S.term,count:S.res.length})};
-const done=()=>{clearTimeout(recTm);if(live)recTm=setTimeout(commit,1500);else commit()};
+let lgd=0;const done=()=>{if(lgd)return;lgd=1;commit()};
 const hit=SC.get(mk);if(hit){apply(hit.docs);if(Date.now()-hit.at<30000){done();return}}
-const q=query(col('vehicles'),where(TF[kind],'array-contains',t),limit(300)),mapD=s=>s.docs.map(d=>({id:d.id,...d.data()}));
+const NF={reg:'regNorm',ch:'chassisNorm',en:'engineNorm'},q=t.length<3?query(col('vehicles'),where(NF[kind],'>=',t),where(NF[kind],'<=',t+'\uf8ff'),orderBy(NF[kind]),limit(300)):query(col('vehicles'),where(TF[kind],'array-contains',t),limit(300)),mapD=s=>s.docs.map(d=>({id:d.id,...d.data()}));
 // 1) saved-on-phone data answers instantly, 2) the server answer follows and only repaints if it differs
 const loc=(!hit&&OM().full)?FSX.getDocsFromCache(q).then(s=>{if(my!==SQ||shownSig!==null)return;const d=mapD(s);if(d.length){apply(d);done()}}).catch(()=>{}):null;
 try{const s=await (navigator.onLine?getDocs(q):FSX.getDocsFromCache(q));if(my!==SQ)return;const d=mapD(s);SC.set(mk,{at:Date.now(),docs:d});if(SC.size>80)SC.delete(SC.keys().next().value);
@@ -1134,27 +1134,26 @@ const canLoans=()=>!!S.u&&(S.u.role==='admin'||lv(S.u));
 const nameWords=s=>String(s||'').toUpperCase().split(/[^A-Z0-9]+/).filter(Boolean);
 const nameTokens=s=>{const o=new Set();nameWords(s).forEach(w=>{for(let l=3;l<=Math.min(w.length,12);l++)o.add(w.slice(0,l))});return[...o]};
 const lrk=()=>'iv_lrecent_'+S.u.uid,lrecents=()=>{try{return JSON.parse(localStorage.getItem(lrk())||'[]')}catch{return[]}};
-let LN={uid:null,term:'',res:[],searched:false,shown:60,type:''};
+let LN={uid:null,term:'',res:[],searched:false,shown:60,type:''},LQ=0,LTM,LLG;
 const lNo=()=>{$('#main').innerHTML='<div class="empty"><h3>Not available</h3><p class="mut">The Loans section is not enabled for your account.<br>Please contact the Admin.</p></div>'};
 async function lcount(){if(!navigator.onLine)return+(localStorage.getItem('iv_off_ln')||0);const n=(await getCountFromServer(col('loans'))).data().count;try{localStorage.setItem('iv_off_ln',n)}catch{}return n}
 async function vLoans(){if(!canLoans())return lNo();if(LN.uid!==S.u.uid)LN={uid:S.u.uid,term:'',res:[],searched:false,shown:60,type:''};
 let n=0;try{n=await lcount()}catch(e){E(e)}const rec=lrecents();
 $('#main').innerHTML=`<div class="hero"><div><span>Total loan records</span><b>${n.toLocaleString()}</b></div><button class="ghost2" id="lrf">${ic('refresh')}Refresh</button></div><div class="card sc"><input id="lq" type="search" placeholder="Enter loan number or customer name" value="${esc(LN.term)}" autocomplete="off" enterkeyhint="search"><button class="btn full" id="lsb" style="margin-top:12px">${ic('search')}Search</button>${rec.length?`<h4>Recent searches <button class="chip" id="lclh" style="float:right;font-size:.75rem">Clear</button></h4><div class="chips">${rec.map(t=>`<button class="chip" data-lq="${esc(t)}">${esc(t)}</button>`).join('')}</div>`:''}</div><div id="lres"></div>`;
-$('#lsb').onclick=loanSearch;$('#lq').onkeydown=e=>{if(e.key==='Enter')loanSearch()};$('#lrf').onclick=()=>{LN.res=[];LN.searched=false;vLoans();toast('Refreshed')};
+$('#lsb').onclick=()=>loanSearch();$('#lq').onkeydown=e=>{if(e.key==='Enter'){e.target.blur();loanSearch()}};$('#lq').oninput=()=>{clearTimeout(LTM);LTM=setTimeout(()=>loanSearch(true),150)};$('#lrf').onclick=()=>{LN.res=[];LN.searched=false;vLoans();toast('Refreshed')};
 const ch=$('#lclh');if(ch)ch.onclick=()=>{try{localStorage.removeItem(lrk())}catch{}vLoans()};
 $('#main').onclick=e=>{const c=e.target.closest('[data-lq]');if(c){LN.term=c.dataset.lq;return vLoans().then(loanSearch)}const v=e.target.closest('[data-ln]');if(v)return loanDetail(v.dataset.ln);if(e.target.id==='lmore'){LN.shown+=60;renderLoans()}};
 if(LN.searched)renderLoans()}
-async function loanSearch(){const raw=$('#lq').value.trim(),t=norm(raw),words=nameWords(raw);if(t.length<3)return toast('Enter at least 3 characters',true);
-$('#lres').innerHTML=skel(6);
-try{const big=words.filter(w=>w.length>=3).sort((a,b)=>b.length-a.length)[0],qs=[gd(query(col('loans'),where('loanTokens','array-contains',t.slice(0,20)),limit(200)))];
+async function loanSearch(live){clearTimeout(LTM);clearTimeout(LLG);const raw=$('#lq').value.trim(),t=norm(raw),words=nameWords(raw);if(t.length<1){if(live){LQ++;LN.term=raw;LN.res=[];LN.searched=false;renderLoans();return}return toast('Enter a number or name to search',true)}
+const my=++LQ;if(!live||!$('#lres').children.length)$('#lres').innerHTML=skel(6);
+try{const sh=t.length<3,big=sh?null:words.filter(w=>w.length>=3).sort((a,b)=>b.length-a.length)[0],qs=[gd(sh?query(col('loans'),where('loanNorm','>=',t),where('loanNorm','<=',t+'\uf8ff'),orderBy('loanNorm'),limit(200)):query(col('loans'),where('loanTokens','array-contains',t.slice(0,20)),limit(200)))];
 if(big)qs.push(gd(query(col('loans'),where('nameTokens','array-contains',big.slice(0,12)),limit(200))));
-const[a,b]=await Promise.all(qs),m=new Map();a.docs.forEach(d=>m.set(d.id,{id:d.id,...d.data()}));
+const[a,b]=await Promise.all(qs),m=new Map();if(my!==LQ)return;a.docs.forEach(d=>m.set(d.id,{id:d.id,...d.data()}));
 if(b)b.docs.forEach(d=>{const x={id:d.id,...d.data()},nw=nameWords(x.customerName);if(words.every(w=>nw.some(y=>y.startsWith(w))))m.set(d.id,x)});
 LN.term=raw;LN.type='';LN.shown=60;LN.searched=true;
 LN.res=[...m.values()].filter(x=>x.active!==false).sort((x,y)=>String(x.customerName||'').localeCompare(String(y.customerName||''),'en',{sensitivity:'base'})||String(x.loanNo||'').localeCompare(String(y.loanNo||''),'en',{numeric:true}));
-if(a.size>=200||(b&&b.size>=200))toast('Showing the first matches. Type more characters to narrow down.');
-try{localStorage.setItem(lrk(),JSON.stringify([raw,...lrecents().filter(x=>x!==raw)].slice(0,20)))}catch{}
-log({type:'loan-search',term:raw,count:LN.res.length});renderLoans()}catch(e){$('#lres').innerHTML='';E(e)}}
+if((a.size>=200||(b&&b.size>=200))&&!live)toast('Showing the first matches. Type more characters to narrow down.');
+const cm=()=>{try{localStorage.setItem(lrk(),JSON.stringify([raw,...lrecents().filter(x=>x!==raw)].slice(0,20)))}catch{}log({type:'loan-search',term:raw,count:LN.res.length})};cm();renderLoans()}catch(e){if(my===LQ){$('#lres').innerHTML='';E(e)}}}
 function renderLoans(){const b=$('#lres'),hr=document.querySelector('.hero');if(hr)hr.style.display=LN.searched?'none':'';if(!LN.searched){b.innerHTML='';return}
 if(!LN.res.length){b.innerHTML=`<div class="empty">${ic('file')}<h3>No loan found</h3><p class="mut">No matching loan record was found for your search.<br>Please verify the loan number or customer name and try again.</p></div>`;return}
 const types=[...new Set(LN.res.map(x=>loanBank(x)).filter(Boolean))].sort(),r=LN.res.filter(x=>!LN.type||bankKey(loanBank(x))===bankKey(LN.type));
