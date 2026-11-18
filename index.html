@@ -525,7 +525,7 @@ img,svg,video,canvas{max-width:100%}
 .um-q input{padding-left:40px;min-height:44px}
 .um-add{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}.um-add svg{width:18px;height:18px}
 .um-card>.pad{margin:0 16px 14px}
-.um-w{overflow-x:auto}
+.um-w{overflow-x:auto;overflow-y:hidden;overscroll-behavior-y:auto}.um-t th,.um-t td{padding-left:6px!important;padding-right:6px!important}.um-t .umb{padding:4px 7px;font-size:.72rem;min-height:30px}.um-sub{white-space:normal;max-width:120px;line-height:1.25}
 .um-t{width:100%;border-collapse:separate;border-spacing:0;font-size:.86rem;table-layout:auto}
 .um-t th{position:static;background:linear-gradient(180deg,#245AA6,#173F7A);color:#fff;text-transform:uppercase;font-size:.68rem;letter-spacing:.04em;font-weight:700;padding:12px 8px;border-bottom:0;white-space:nowrap}
 .um-t td{padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle;background:transparent}
@@ -553,6 +553,61 @@ img,svg,video,canvas{max-width:100%}
  .um-t td .umb{min-width:150px}
 }
 @media(max-width:560px){.um-stats{width:100%}.um-st{flex:1 1 40%}.um-add{width:100%}.um-bar h3{width:100%}}
+
+/* ===== UNIFIED PAGE STYLE: every screen uses the same look as User Management (header card, gradient tables, soft action buttons) ===== */
+.um-head.pg{margin-bottom:14px}
+.um-head.pg .um-ti h1{font-size:1.4rem;margin:0}
+.um-head.pg .um-ti p{margin:2px 0 0;color:var(--mut);font-size:.88rem}
+.um-head.pg .um-ti>div{min-width:0}
+@media(max-width:600px){.um-head.pg{padding:12px 14px;gap:8px}.um-head.pg .um-logo{width:42px;height:42px;border-radius:12px}.um-head.pg .um-logo svg{width:22px;height:22px}.um-head.pg .um-ti{gap:12px}.um-head.pg .um-ti h1{font-size:1.2rem}.um-head.pg .um-ti p{font-size:.8rem}}
+/* tables: blue gradient header, same row rhythm */
+#main .tw table th,#main #al th{background:linear-gradient(180deg,#245AA6,#173F7A)!important;color:#fff!important;text-transform:uppercase;font-size:.68rem;letter-spacing:.04em;font-weight:700;padding:12px 12px;border-bottom:0}
+#main .tw table td{padding:10px 12px;vertical-align:middle}
+#main .tw{border-radius:16px;overflow:auto}
+#main .card>.tw,#main .card>.tw:first-child{border:0;box-shadow:none;margin:0;border-radius:0}
+#main .tw tbody tr:hover td,#main .tw tr:hover>td{background:color-mix(in srgb,var(--idle) 60%,transparent)}
+/* cards and panels */
+#main .card,#main .panel,#main .vc,#main .lcard{border-radius:16px}
+#main .panel{padding:18px}
+/* section titles get the same blue accent */
+#main>h3{display:flex;align-items:center;gap:8px;font-size:1.05rem;margin:22px 0 8px}
+#main>h3::before{content:"";width:4px;height:18px;border-radius:3px;background:linear-gradient(180deg,#2F7BE8,#1747A8)}
+/* dashboard stat tiles share the gradient icon tile */
+#main .ki{background:linear-gradient(145deg,#2F7BE8,#1747A8);color:#fff;box-shadow:0 8px 18px -8px rgba(23,71,168,.7);border-radius:12px}
+#main .kpi{background:var(--sf);border-radius:14px}
+/* small buttons inside tables: soft coloured "umb" look */
+#main .tw .btn.sm2{min-height:32px;padding:4px 10px;border-radius:9px;font-size:.76rem;font-weight:600;box-shadow:0 1px 2px rgba(8,16,32,.08)!important}
+#main .tw .btn.sm2.danger{background:var(--bads);color:var(--bad);border:1px solid color-mix(in srgb,var(--bad) 30%,transparent)}
+#main .tw .btn.sm2.ghost{background:#F1F3F7;color:#333D4D;border:1px solid #D5DAE3}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) #main .tw .btn.sm2.ghost{background:#1B2740;color:#D5DEEE;border-color:#2A3A5C}}
+:root[data-theme="dark"] #main .tw .btn.sm2.ghost{background:#1B2740;color:#D5DEEE;border-color:#2A3A5C}
+/* search and toolbar rows read as one calm card */
+#main .card.sc,#main .hero{border-radius:16px}
+#main .row>input.grow,#main .row>select.grow{min-height:44px}
+
+/* ===== SCROLL FIX: page scrolls up/down from anywhere (sidebar, header, tables, empty space) ===== */
+html{overflow-x:hidden;overflow-y:auto;height:auto;overscroll-behavior-y:auto}
+html body{overflow-x:clip;overflow-y:visible;height:auto;min-height:100vh;overscroll-behavior-y:auto}
+.tw,#main .tw,.um-w{overflow-x:auto;overflow-y:hidden;overscroll-behavior-y:auto}
+.layout,.content,#main{overflow:visible}
+@media(min-width:900px){.side{overflow-y:auto;overscroll-behavior:auto;scrollbar-width:none}.side::-webkit-scrollbar{display:none}}
+
+/* ===== FIT FIX: staff table fits the screen without sideways scrolling ===== */
+@media(min-width:1101px){
+.um-w{overflow-x:visible}
+.um-t{table-layout:auto;width:100%;font-size:.82rem}
+.um-t th,.um-t td{white-space:normal!important;padding-left:5px!important;padding-right:5px!important;vertical-align:middle}
+.um-t th{font-size:.62rem;letter-spacing:.02em;line-height:1.2}
+.um-t .um-av{display:none}
+.um-t .um-mb svg{display:none}
+.um-t .um-nm{gap:0}
+.um-t .umb{white-space:normal;line-height:1.15;text-align:center;padding:5px 8px;min-height:32px;max-width:100%}
+.um-t .umb svg{width:13px;height:13px}
+.um-t .um-sub{max-width:110px}
+}
+@media(min-width:1101px) and (max-width:1500px){
+.um-t .umb svg{display:none}
+}
 </style>
 </head><body><div id="app"><p style="text-align:center;margin-top:30vh">Loading…</p></div><div id="toast"></div>
 <script>
@@ -793,11 +848,29 @@ function locStop(){LOC.on=false;LOC.exUntil=0;LOC.reqAt=0;clearInterval(LOC.time
 
 async function startSession(){SID=uuid();const r=doc(fs,'sessions',S.u.uid),id=getDid(),now=Date.now();
 const sp=setDoc(r,{uid:S.u.uid,name:S.u.name,mobile:S.u.mobile||'',role:S.u.role,vip:!!S.u.vip,status:'online',lastSeen:now,devices:{[id]:{sid:SID,device:devName()+' #'+id.slice(-4).toUpperCase(),loginAt:now,lastSeen:now,status:'online',locOk:null,loc:null}}},{merge:true}).catch(()=>{});await Promise.race([sp,new Promise(r=>setTimeout(r,navigator.onLine?6000:0))]);
-unsub=onSnapshot(r,s=>{const d=s.data();if(!d||!SID||S.u?.role==='admin')return;const ex=d.exemptUntil||0;if(ex!==(LOC.exUntil||0)){LOC.exUntil=ex;if(locExempt())toast('The Admin has allowed you to work without location');locGuard()}if(d.status==='revoked'||d.devices?.[id]?.status==='revoked')kick('The Admin ended your session. Please sign in again.');try{const q=+d.loadReq||0;if(q&&q>(+localStorage.getItem('iv_lreq')||0)&&navigator.onLine&&!LX.busy&&!S.localMode){localStorage.setItem('iv_lreq',String(q));toast('Your Admin requested a data update. Loading...');lxSync(false)}}catch{}});
+unsub=onSnapshot(r,s=>{const d=s.data();if(!d||!SID||S.u?.role==='admin')return;const ex=d.exemptUntil||0;if(ex!==(LOC.exUntil||0)){LOC.exUntil=ex;if(locExempt())toast('The Admin has allowed you to work without location');locGuard()}if(d.status==='revoked'||d.devices?.[id]?.status==='revoked')kick('The Admin ended your session. Please sign in again.');try{const q=+d.loadReq||0;if(q&&q>(+localStorage.getItem('iv_lreq')||0)&&navigator.onLine&&!LX.busy&&!S.localMode){localStorage.setItem('iv_lreq',String(q));toast('Your Admin requested a data update. Loading...');lxSync(false)}}catch{}try{const p=+d.purgeReq||0;if(p&&p>(+localStorage.getItem('iv_preqd')||0)&&!S.localMode)purgePrep(p)}catch{}});
 hb=setInterval(()=>{if(navigator.onLine){updateDoc(r,{lastSeen:Date.now(),[dk('lastSeen')]:Date.now(),[dk('status')]:'online'}).catch(()=>{});repData()}},120000);setTimeout(repData,3000)}
 async function endSession(write){locStop();clearInterval(hb);unsub&&unsub();unsub=null;const sid=SID;SID=null;if(write&&S.u&&sid&&navigator.onLine){try{const r=doc(fs,'sessions',S.u.uid);if((await offTo(getDoc(r),5000)).data()?.devices?.[getDid()]?.sid===sid)await offTo(updateDoc(r,{[dk('status')]:'ended',[dk('lastSeen')]:Date.now()}),5000)}catch{}}}
 async function kick(m){clearTimeout(idle);await endSession(false);await signOut(auth);toast(m,true)}
 async function logout(m){S.localMode=false;clearTimeout(idle);await endSession(true);await signOut(auth);if(m)toast(m)}
+/* ---------- admin deleted data: staff must reload all data (popup cannot be dismissed) ---------- */
+async function purgeAck(){try{let p=+localStorage.getItem('iv_ppend')||0;try{if(S.u&&S.u.uid)p=Math.max(p,+((await getDoc(doc(fs,'sessions',S.u.uid))).data()?.purgeReq)||0)}catch{}if(p)localStorage.setItem('iv_preqd',String(Math.max(p,+localStorage.getItem('iv_preqd')||0)));localStorage.removeItem('iv_ppend');const g=document.getElementById('pg');if(g)g.remove()}catch{}}
+async function purgeNotify(){try{const n=Date.now(),us=(await getDocs(col('users'))).docs.filter(d=>d.data().role!=='admin');for(let i=0;i<us.length;i+=400){const w=writeBatch(fs);us.slice(i,i+400).forEach(d=>w.set(doc(fs,'sessions',d.id),{purgeReq:n},{merge:true}));await w.commit()}}catch(e){console.warn('purgeNotify',e);try{toast('Deleted, but staff could not be notified to reload data',true)}catch{}}}
+async function purgePrep(p){try{localStorage.setItem('iv_ppend',String(Math.max(p,+localStorage.getItem('iv_ppend')||0)))}catch{}purgeGate()}
+function purgeGate(){if(document.getElementById('pg'))return;const o=document.createElement('div');o.id='pg';o.style.cssText='position:fixed;inset:0;z-index:100000;background:rgba(6,12,24,.94);display:flex;align-items:center;justify-content:center;padding:16px';
+o.innerHTML='<div style="width:100%;max-width:380px;background:#fff;color:#0E1B2E;border-radius:16px;padding:20px;text-align:center;font-family:inherit"><div style="font-size:34px">&#128260;</div><h3 style="margin:8px 0 6px">Data has been changed</h3><p class="pm" style="margin:0 0 16px;color:#5A6A80;font-size:14px">The Admin has deleted data. Please reload all data to continue. Old records on this phone must be removed.</p><button type="button" style="width:100%;padding:13px;border:0;border-radius:10px;background:#12489B;color:#fff;font-weight:700;font-size:15px;cursor:pointer">Reload all data</button></div>';
+document.body.appendChild(o);const b=o.querySelector('button'),m=o.querySelector('.pm');
+b.onclick=async()=>{if(!navigator.onLine){m.textContent='Internet is needed. Please connect and try again.';return}
+const q0=+localStorage.getItem('iv_ppend')||0;b.disabled=true;b.style.opacity='.7';b.textContent='Reloading...';
+const tk=setInterval(()=>{if(LX.busy&&LX.msg)b.textContent=LX.msg},400);
+try{while(LX.busy)await new Promise(r=>setTimeout(r,500));const t=Date.now();await lxSync(true);const ok=LX.ready&&LX.at>=t;if(ok&&OM().full)await offSync(true);
+if(!ok)throw 0;
+try{localStorage.setItem('iv_preqd',String(q0))}catch{}
+if((+localStorage.getItem('iv_ppend')||0)>q0){b.disabled=false;b.style.opacity='';b.textContent='Reload all data';m.textContent='Data changed again. Please reload once more.';return}
+try{localStorage.removeItem('iv_ppend')}catch{}o.remove();toast('Data reloaded')}
+catch{b.disabled=false;b.style.opacity='';b.textContent='Try again';m.textContent='Reload failed. Please check internet and try again.'}
+finally{clearInterval(tk)}}}
+setInterval(()=>{const g=document.getElementById('pg');if(!S.u||S.u.role==='admin'){if(g)g.remove();return}const p=+localStorage.getItem('iv_ppend')||0;if(p&&p>(+localStorage.getItem('iv_preqd')||0)&&!g)purgeGate()},3000);
 
 /* ---------- offline mode: saved data, offline sign-in, queued logs ---------- */
 const offTo=(pr,ms)=>Promise.race([pr,new Promise((_,r)=>setTimeout(()=>r(Object.assign(new Error('timeout'),{code:'unavailable'})),ms))]);
@@ -828,7 +901,7 @@ const inc=!full&&LX.ready&&LX.at,t0=Date.now(),m=inc?new Map(LX.rows.map(v=>[v.i
 try{let last=null;for(;;){const base=inc?[col('vehicles'),where('updatedAt','>',LX.at-300000),orderBy('updatedAt')]:[col('vehicles'),orderBy('regNorm')];const s=await getDocs(query(...base,...(last?[startAfter(last)]:[]),limit(1000)));
 s.docs.forEach(d=>{const x=d.data();m.set(d.id,{id:d.id,regNo:x.regNo||'',regNorm:x.regNorm||norm(x.regNo||d.id),chassisNorm:x.chassisNorm||'',engineNorm:x.engineNorm||'',make:x.make||'',model:x.model||'',updatedAt:x.updatedAt||0,active:x.active!==false})});
 n+=s.size;LX.msg='Loading data... '+n.toLocaleString()+' vehicles';paintLx();if(s.size<1000)break;last=s.docs[s.size-1]}
-LX.rows=[...m.values()].sort((a,b)=>a.regNorm<b.regNorm?-1:a.regNorm>b.regNorm?1:0);LX.at=t0;LX.ready=true;await lxSave();repData();if(!silent)toast(inc?'Data updated ('+n+' changed)':'Data loaded: '+LX.rows.length.toLocaleString()+' vehicles. Search is now instant.')}
+LX.rows=[...m.values()].sort((a,b)=>a.regNorm<b.regNorm?-1:a.regNorm>b.regNorm?1:0);LX.at=t0;LX.ready=true;await lxSave();if(!inc)await purgeAck();repData();if(!silent)toast(inc?'Data updated ('+n+' changed)':'Data loaded: '+LX.rows.length.toLocaleString()+' vehicles. Search is now instant.')}
 catch(e){console.error(e);if(!silent)E(e)}finally{LX.busy=false;paintLx()}}
 function paintLx(){const c=document.getElementById('lxc'),b=document.getElementById('lx');
 if(c){if(LX.busy){c.className='lxc busy';c.onclick=null;c.textContent='\u26A1 '+((LX.msg.match(/([\d,]+) vehicles/)||[])[1]||'...')}
@@ -895,6 +968,20 @@ return[['dash','Dashboard','home'],...(p==='loans'?l:v),...c]}
 function paintNav(){const nv=document.querySelector('.nv');if(nv)nv.innerHTML=navItems().map(n=>`<button data-t="${n[0]}">${ic(n[2])}<span>${n[1]}</span></button>`).join('');const sw=document.getElementById('psw');if(sw)sw.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.p===S.panel))}
 const V={dash:vDash,search:vSearch,all:vAll,loans:vLoans,lall:vLoanAll,live:vLive,cmd:vCmd,staff:vStaff,imp:vImp,limp:vLimp,db:vDb,act:vAct};
 function go(t){if(LIVE){LIVE();LIVE=null}S.tab=t;if(PANEL_OF[t]&&PANEL_OF[t]!==S.panel){S.panel=PANEL_OF[t];paintNav()}document.querySelectorAll('.nv button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));V[t]().then(()=>animNums()).catch(E)}
+
+/* ---------- same page header on every screen (matches User Management) ---------- */
+const PG={dash:['home','Dashboard','Overview of your database and field team.'],search:['search','Vehicle Search','Find a vehicle by registration, chassis or engine number.'],all:['car','All vehicles',''],imp:['import','Vehicle Import','Upload Excel or CSV files into the vehicle database.'],db:['db','Database','Search, export and manage vehicle records.'],loans:['search','Loan Search','Find a loan by loan number or customer name.'],lall:['loan','All loans',''],limp:['import','Loan Import','Upload loan files. They are stored separately from vehicle data.'],live:['live','Live sessions',''],act:['list','Activity','']};
+function pgHead(){try{const m=document.getElementById('main'),d=S.u&&PG[S.tab];if(!m||!d||m.classList.contains('cmw')||m.querySelector(':scope>.um-head'))return;
+const ph=m.querySelector(':scope>.ph');let t=d[1],p=null;
+if(ph){const h=ph.querySelector('h1,h2');if(h)t=h.textContent;p=ph.querySelector('p')}
+else{const h=m.querySelector(':scope>h2');if(h&&['imp','limp','db'].includes(S.tab))h.remove()}
+const el=document.createElement('div');el.className='um-head pg';
+el.innerHTML=`<div class="um-ti"><span class="um-logo">${ic(d[0])}</span><div><h1></h1></div></div>`;
+el.querySelector('h1').textContent=t;
+const box=el.querySelector('.um-ti>div');
+if(p){box.appendChild(p)}else if(d[2]){const q=document.createElement('p');q.textContent=d[2];box.appendChild(q)}
+if(ph)ph.replaceWith(el);else m.insertBefore(el,m.firstChild)}catch(e){}}
+{let raf=0;new MutationObserver(()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(pgHead)}).observe(document.getElementById('app'),{childList:true,subtree:true})}
 /* numbers count up when a screen opens (hero total, dashboard stats) */
 function animNums(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;document.querySelectorAll('.hero b,.stat b,.kpi b').forEach(el=>{const t=el.textContent.trim();if(!/^[\d,]+$/.test(t)||el.dataset.cu===t)return;el.dataset.cu=t;const to=+t.replace(/,/g,'');if(!to||to>1e9)return;const fmt=t.includes(',')||to>=1000,st=performance.now(),D=Math.min(900,350+Math.log10(to+1)*120);(function f(now){const k=Math.min((now-st)/D,1),v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=fmt?v.toLocaleString():v;if(k<1)requestAnimationFrame(f)})(st)})}
 /* haptics: a light tap on buttons, chips, rows, tabs (turn off with localStorage iv_haptic=0) */
@@ -1211,7 +1298,7 @@ const row=b.closest('tr');if(row)row.remove();toast('Deleting…');
 const s=await P,ids=s.docs.map(d=>d.id),jobs=[];
 for(let k=0;k<ids.length;k+=250){const w=writeBatch(fs);ids.slice(k,k+250).forEach(id=>{w.delete(doc(fs,'vehicles',id,'private','d'));w.delete(doc(fs,'vehicles',id))});jobs.push(w.commit())}
 const w=writeBatch(fs);w.delete(doc(fs,'imports',i.id));jobs.push(w.commit());
-await Promise.all(jobs);log({type:'delete-import',term:i.file,count:ids.length});toast('Deleted '+ids.length+' records');vImp()}catch(er){E(er);vImp()}};
+await Promise.all(jobs);await purgeNotify();log({type:'delete-import',term:i.file,count:ids.length});toast('Deleted '+ids.length+' records');vImp()}catch(er){E(er);vImp()}};
 $('#f').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const wb=await readBook(f),fin=await pickFinance(f.name);I={file:f.name,fin,sheets:wb.SheetNames.map(n=>{const r=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''});const h=(r[0]||[]).map(String);return{n,h,rows:r.slice(1).filter(x=>x.some(c=>String(c).trim())),m:autoMap(h)}}),cur:0};mapView()}catch(er){bookErr(er,'#f')}}}
 function mapView(){const s=I.sheets[I.cur];$('#ib').innerHTML=`<p>Sheet: <select id="sh">${I.sheets.map((x,i)=>`<option value="${i}" ${i===I.cur?'selected':''}>${esc(x.n)} (${x.rows.length} rows)</option>`).join('')}</select></p><p class="mut sm">Column mapping (auto-detected; change if wrong)</p>${FIELDS.map(f=>f[3]?`<div class="row"><span class="grow sm">${f[1]}<br><span class="mut">Ctrl/Shift+click to select several columns</span></span><select data-f="${f[0]}" multiple size="4" class="grow">${s.h.map((h,i)=>`<option value="${i}" ${(s.m[f[0]]||[]).includes(i)?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`:`<div class="row"><span class="grow sm">${f[1]}</span><select data-f="${f[0]}" class="grow"><option value="">— not mapped —</option>${s.h.map((h,i)=>`<option value="${i}" ${s.m[f[0]]===i?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`).join('')}<div class="row"><span class="grow sm">Finance for this file<br><span class="mut">Used when the file has no finance column, or the cell is empty</span></span><input id="vfin" class="grow" list="finl" placeholder="e.g. HDFC Bank" value="${esc(I.fin||'')}"><datalist id="finl">${finSaved().map(x=>`<option value="${esc(x)}">`).join('')}</datalist></div><p class="mut sm">Preview</p>${tbl(s.h,s.rows.slice(0,5))}<button class="btn full" id="va">Validate</button><div id="vr"></div>`;
 $('#sh').onchange=e=>{I.cur=+e.target.value;mapView()};$('#ib').querySelectorAll('[data-f]').forEach(x=>x.onchange=()=>{s.m={};$('#ib').querySelectorAll('[data-f]').forEach(y=>{if(y.multiple){const a=[...y.selectedOptions].map(o=>+o.value);if(a.length)s.m[y.dataset.f]=a}else if(y.value!=='')s.m[y.dataset.f]=+y.value})});$('#va').onclick=()=>validate().catch(E)}
@@ -1332,7 +1419,7 @@ const row=b.closest('tr');if(row)row.remove();toast('Deleting…');
 const s=await P,ids=s.docs.map(d=>d.id),jobs=[];
 for(let k=0;k<ids.length;k+=450){const w=writeBatch(fs);ids.slice(k,k+450).forEach(id=>w.delete(doc(fs,'loans',id)));jobs.push(w.commit())}
 const w=writeBatch(fs);w.delete(doc(fs,'loanImports',i.id));jobs.push(w.commit());
-await Promise.all(jobs);log({type:'delete-loan-import',term:i.file,count:ids.length});toast('Deleted '+ids.length+' records');vLimp()}catch(er){E(er);vLimp()}};
+await Promise.all(jobs);await purgeNotify();log({type:'delete-loan-import',term:i.file,count:ids.length});toast('Deleted '+ids.length+' records');vLimp()}catch(er){E(er);vLimp()}};
 $('#lf').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const wb=await readBook(f),fin=await pickFinance(f.name);LI={file:f.name,fb:fin,sheets:wb.SheetNames.map(n=>{const r=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:false,defval:''});const h=(r[0]||[]).map(String);return{n,h,rows:r.slice(1).filter(x=>x.some(c=>String(c).trim())),m:lAutoMap(h)}}),cur:0,ft:''};lMapView()}catch(er){bookErr(er,'#lf')}}}
 function lMapView(){const s=LI.sheets[LI.cur];$('#lib').innerHTML=`<p>Sheet: <select id="lsh">${LI.sheets.map((x,i)=>`<option value="${i}" ${i===LI.cur?'selected':''}>${esc(x.n)} (${x.rows.length} rows)</option>`).join('')}</select></p><p class="mut sm">Column mapping (auto-detected; change if wrong)</p>${LF.map(f=>f[3]?`<div class="row"><span class="grow sm">${f[1]}<br><span class="mut">Ctrl/Shift+click to select several columns</span></span><select data-lf="${f[0]}" multiple size="4" class="grow">${s.h.map((h,i)=>`<option value="${i}" ${(s.m[f[0]]||[]).includes(i)?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`:`<div class="row"><span class="grow sm">${f[1]}</span><select data-lf="${f[0]}" class="grow"><option value="">— not mapped —</option>${s.h.map((h,i)=>`<option value="${i}" ${s.m[f[0]]===i?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`).join('')}<div class="row"><span class="grow sm">Finance for this file<br><span class="mut">Used when the file has no bank column, or the cell is empty</span></span><input id="lfb" class="grow" list="finl" placeholder="e.g. HDFC Bank" value="${esc(LI.fb||'')}"><datalist id="finl">${finSaved().map(x=>`<option value="${esc(x)}">`).join('')}</datalist></div><div class="row"><span class="grow sm">Loan type for all rows<br><span class="mut">Used when the file has no loan type column, or the cell is empty</span></span><input id="lft" class="grow" list="lfl" placeholder="e.g. Personal Loan" value="${esc(LI.ft||'')}"><datalist id="lfl"><option value="Personal Loan"><option value="Business Loan"><option value="Home Loan"><option value="Loan Against Property"><option value="Gold Loan"><option value="Other"></datalist></div><p class="mut sm">All other columns in the file are saved and shown on the loan card.</p>${tbl(s.h,s.rows.slice(0,5))}<button class="btn full" id="lva">Validate</button><div id="lvr"></div>`;
 $('#lsh').onchange=e=>{LI.cur=+e.target.value;LI.ft=$('#lft').value;lMapView()};$('#lib').querySelectorAll('[data-lf]').forEach(x=>x.onchange=()=>{s.m={};$('#lib').querySelectorAll('[data-lf]').forEach(y=>{if(y.multiple){const a=[...y.selectedOptions].map(o=>+o.value);if(a.length)s.m[y.dataset.lf]=a}else if(y.value!=='')s.m[y.dataset.lf]=+y.value})});$('#lva').onclick=()=>lValidate().catch(E)}
@@ -1362,7 +1449,7 @@ const draw=async()=>{try{DBL=await dbList($('#dq').value)}catch(e){return E(e)}$
 $('#dg').onclick=draw;$('#dq').onkeydown=e=>{if(e.key==='Enter')draw()};
 $('#dx').onclick=async()=>{if(!DBL.length)return toast('Nothing to export',true);try{const rows=await Promise.all(DBL.map(async v=>{let p={};try{p=(await getDoc(doc(fs,'vehicles',v.id,'private','d'))).data()||{}}catch{}const mb=p.mobiles||(p.mobile?[p.mobile]:[]),ad=p.addresses||(p.address?[p.address]:[]);return{'Financer Name':v.financer,'Loan Number':p.loanNo,'Customer Name':p.customerName,'Vehicle Number':v.regNo,POS:p.pos,EMI:p.emi,BKT:p.bkt,'Customer Mobile No':mb.join(', '),Address:ad.join(' | '),'Chassis Number':v.chassisNo,'Engine Number':v.engineNo,'Date Uploaded':v.importedAt?new Date(v.importedAt).toLocaleDateString():''}}));const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows),'Vehicles');XLSX.writeFile(wb,'infinity-vision-export.xlsx');log({type:'export',count:rows.length})}catch(e){E(e)}};
 $('#dl').onclick=async e=>{const b=e.target.closest('[data-a]');if(!b)return;const v=DBL.find(x=>x.id===b.dataset.i);try{if(b.dataset.a==='tg'){const a=v.active===false;await updateDoc(doc(fs,'vehicles',v.id),{active:a,updatedAt:Date.now()});log({type:a?'restore':'deactivate',term:v.regNo||v.id});v.active=a}
-else{if(!await ask(`Permanently delete ${esc(v.regNo||v.id)}? This cannot be undone.`))return;const w=writeBatch(fs);w.delete(doc(fs,'vehicles',v.id));w.delete(doc(fs,'vehicles',v.id,'private','d'));await w.commit();log({type:'delete',term:v.regNo||v.id});DBL=DBL.filter(x=>x!==v)}draw()}catch(er){E(er)}};draw()}
+else{if(!await ask(`Permanently delete ${esc(v.regNo||v.id)}? This cannot be undone.`))return;const w=writeBatch(fs);w.delete(doc(fs,'vehicles',v.id));w.delete(doc(fs,'vehicles',v.id,'private','d'));await w.commit();await purgeNotify();log({type:'delete',term:v.regNo||v.id});DBL=DBL.filter(x=>x!==v)}draw()}catch(er){E(er)}};draw()}
 
 /* ---------- staff management ---------- */
 const askPw=m=>dlg(`<p>${m}</p><input type="text" autocomplete="off"><div class="row" style="margin-top:12px"><button class="btn ghost grow" data-r="no">Cancel</button><button class="btn grow" data-r="ok">Set password</button></div>`);
@@ -1379,6 +1466,7 @@ const stat=(ic,n,t,c)=>`<div class="um-st ${c}"><span class="um-si">${ic}</span>
 $('#main').innerHTML=`<div class="um-head"><div class="um-ti"><span class="um-logo">${IC.grp}</span><div><h1>User Management</h1><p>Manage user accounts, access permissions and visibility controls</p></div></div><div class="um-stats">${stat(IC.add,us.length,'Total Users','b')}${stat(IC.usr,nAct,'Active','g')}${stat(IC.usr,us.length-nAct,'Inactive','n')}${stat(IC.db,nLoaded,'Data loaded','g')}</div></div><div class="card um-card"><div class="um-bar"><h3>${IC.grp}<span>All Users (<span id="umc">${us.length}</span>)</span></h3><label class="um-q">${IC.srch}<input id="uq" type="search" placeholder="Search by name or mobile..." autocomplete="off"></label><button class="btn ghost um-add" data-a="ldall">${IC.db}Load data to all staff</button><button class="btn um-add" id="uadd">${IC.add}Add User</button></div><div class="card pad" id="apc" hidden><h3>Appoint new staff</h3><div class="fg"><div><label>Full name</label><input id="nn"></div><div><label>Mobile number</label><div class="pre"><span>+91</span><input id="nu" inputmode="numeric" maxlength="14"></div></div><div><label>Password (min 4)</label><input id="np" type="text" autocomplete="off"></div></div><button class="btn" id="nc">Appoint staff</button></div>${us.length?`<div class="um-w"><table class="um-t" id="umt"><thead><tr><th>#</th><th>Name</th><th>Mobile</th><th>Status</th><th>Data on device</th><th>Customer details</th><th>Loans</th><th>Account</th><th>Password</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p class="mut pad">No staff yet. Tap Add User.</p>'}</div>${infCard}`;
 {const q=$('#uq');if(q)q.oninput=()=>{const t=q.value.toLowerCase().trim();let n=0;document.querySelectorAll('#umt tbody tr').forEach(r=>{const m=!t||r.dataset.s.includes(t);r.hidden=!m;if(m)n++});$('#umc').textContent=n}}
 $('#uadd').onclick=()=>{const a=$('#apc');a.hidden=!a.hidden;if(!a.hidden){a.scrollIntoView({behavior:'smooth',block:'nearest'});setTimeout(()=>$('#nn').focus(),250)}};
+{const w=document.querySelector('.um-w');if(w)w.addEventListener('wheel',e=>{if(e.ctrlKey||e.shiftKey||Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;e.preventDefault();(document.scrollingElement||document.documentElement).scrollBy(0,e.deltaY)},{passive:false})}
 const ivc=$('#ivc');if(ivc)ivc.onclick=async()=>{const pw='2004';try{const h=await sha('infinity');if((await getDoc(doc(fs,'login',h))).exists())return toast('Infinity already exists',true);const email='infinity@iv.local',c=await createUserWithEmailAndPassword(auth2,email,'iv-inf-'+pw);await signOut(auth2);const b=writeBatch(fs);b.set(doc(fs,'users',c.user.uid),{u:'infinity',mobile:'infinity',name:'Infinity',role:'staff',vip:true,active:true,contacts:false,created:Date.now()});b.set(doc(fs,'login',h),{e:email});await b.commit();log({type:'infinity-created',term:'Infinity'});toast('Infinity user created');vStaff()}catch(e){E(e)}};
 $('#nc').onclick=async()=>{const m=cleanMobile($('#nu').value),p=$('#np').value,n=$('#nn').value.trim();if(!n)return toast('Enter the staff name',true);if(!m)return toast('Enter a valid 10-digit mobile number',true);if(p.length<4)return toast('Password must be at least 4 characters',true);
 try{const h=await sha(m);if((await getDoc(doc(fs,'login',h))).exists())return toast('This mobile number is already registered',true);const email=m+'@iv.local',c=await createUserWithEmailAndPassword(auth2,email,fbp(p));await signOut(auth2);
