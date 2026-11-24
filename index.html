@@ -848,7 +848,7 @@ function locStop(){try{bgStop();psClose()}catch{}LOC.on=false;LOC.exUntil=0;LOC.
 
 /* ---------- pre-start screen + background mode ---------- */
 const BGR={on:false,wl:null,au:null,url:null},PS={p:null,t:null,busy:false};
-const bgPref=()=>{try{return localStorage.getItem('iv_bg')!=='0'}catch{return true}};
+const bgPref=()=>true;
 function bgWav(){const n=8000,b=new Uint8Array(44+n),v=new DataView(b.buffer),w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,8000,true);v.setUint32(28,8000,true);v.setUint16(32,1,true);v.setUint16(34,8,true);w(36,'data');v.setUint32(40,n,true);b.fill(128,44);return URL.createObjectURL(new Blob([b],{type:'audio/wav'}))}
 async function bgWake(){try{if(!BGR.on||!navigator.wakeLock||document.hidden)return;if(BGR.wl&&!BGR.wl.released)return;BGR.wl=await navigator.wakeLock.request('screen')}catch{}}
 function bgVis(){if(!BGR.on)return;const h=document.hidden;if(!h){bgWake();try{if(BGR.au&&BGR.au.paused)BGR.au.play().catch(()=>{})}catch{}}locWrite({vis:h?'hidden':'visible',visAt:Date.now()})}
@@ -865,14 +865,14 @@ const rowS='display:flex;align-items:center;gap:10px;background:rgba(255,255,255
 o.innerHTML=`<div style="max-width:400px;width:100%;margin:auto;text-align:center"><svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#8FB2FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><h2 style="color:#fff;margin:14px 0 8px">Hello ${nm}, start your work</h2><p style="color:#C9D6EE;margin:0">Your live location is shared with the Admin while you work. Turn Location ON to begin.</p>
 <div style="${rowS}"><i id="psd" style="width:12px;height:12px;border-radius:50%;background:#94a3b8;flex:none"></i><div style="flex:1"><b>Location</b><div id="pss" style="color:#C9D6EE;font-size:.82rem">Not turned on yet</div></div></div>
 <button class="btn full" id="psb" style="margin-top:12px">Turn ON Location</button><div id="psh" hidden style="text-align:left;background:rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.84rem;line-height:1.55;color:#DCE6F8"></div>
-<label style="${rowS};cursor:pointer"><input type="checkbox" id="psg" ${bgPref()?'checked':''} style="width:22px;height:22px;flex:none;accent-color:#6F9BFF"><span style="flex:1"><b>Keep tracking in background</b><span style="display:block;color:#C9D6EE;font-size:.82rem">The app keeps your screen awake and keeps running while you use other apps. Do not close or swipe away the app.</span></span></label>
+
 <button class="btn full" id="psgo" disabled style="margin-top:14px">Start Work</button>
 <button class="btn ghost full" id="psq" style="margin-top:10px">Ask Admin to allow without location</button><button class="btn ghost full" id="pso" style="margin-top:10px">Log out</button></div>`;
 document.body.appendChild(o);const q=x=>o.querySelector(x),setS=(c,t)=>{q('#psd').style.background=c;q('#pss').textContent=t},ok=()=>!!PS.p||locExempt();
 const sync=()=>{const g=q('#psgo');if(!g)return;if(PS.p){setS('#22c55e','ON · accuracy about '+Math.round(PS.p.coords.accuracy||0)+' m');g.disabled=false;g.textContent='Start Work'}else if(locExempt()){setS('#f59e0b','The Admin allowed you to work without location');g.disabled=false;g.textContent='Continue without location'}else{g.disabled=true;g.textContent='Start Work'}};
 const check=async()=>{if(PS.busy)return;PS.busy=true;const b=q('#psb');b.disabled=true;b.textContent='Checking…';setS('#f59e0b','Checking…');try{PS.p=await getPos();q('#psh').hidden=true;b.textContent='Location is ON'}catch(e){PS.p=null;const c=(e&&e.code)||0;setS('#ef4444','Location is OFF');const h=q('#psh');h.hidden=false;h.innerHTML=`<p style="margin:0 0 8px;color:#fff">${locBadOrigin()&&(c===0||c===1)?'The app was not opened from a proper link.':locMsg(c)}</p>${locHow()}`;b.textContent='Turn ON Location'}b.disabled=false;PS.busy=false;sync()};
 q('#psb').onclick=check;
-q('#psgo').onclick=()=>{if(!ok())return;const on=q('#psg').checked;try{localStorage.setItem('iv_bg',on?'1':'0')}catch{}if(on)bgStart();const p=PS.p;psClose();const a=document.getElementById('app');if(a)a.style.display='';locStart();if(p)locOK(p);toast(on?'Work started. Location is shared in the background.':'Work started')};
+q('#psgo').onclick=()=>{if(!ok())return;const on=true;bgStart();const p=PS.p;psClose();const a=document.getElementById('app');if(a)a.style.display='';locStart();if(p)locOK(p);toast(on?'Work started. Location is shared in the background.':'Work started')};
 q('#psq').onclick=psAsk;q('#pso').onclick=()=>{psClose();const a=document.getElementById('app');if(a)a.style.display='';logout()};
 PS.t=setInterval(sync,3000);sync();
 try{if(navigator.permissions&&navigator.permissions.query)navigator.permissions.query({name:'geolocation'}).then(ps=>{if(ps.state==='granted')check()}).catch(()=>{})}catch{}}
@@ -956,7 +956,7 @@ addEventListener('online',()=>{LOC.lastW=0;LOC.flag=null;if(S.localMode){if(S.u&
 addEventListener('offline',()=>toast('You are offline. Saved data will be used.'));
 
 /* ---------- automatic in-app update: new version on the server is applied by itself ---------- */
-const APP_VER='2026-1.1';
+const APP_VER='2026-1.2';
 async function chkUpdate(fast){try{if(!navigator.onLine||!/^https?:$/.test(location.protocol)||document.getElementById('updb'))return;const r=await fetch(location.href.split('#')[0],{cache:'no-store'});if(!r.ok)return;const m=(await r.text()).match(/APP_VER\s*=\s*'([^']+)'/);if(m&&m[1]!==APP_VER)applyUpd(fast)}catch{}}
 function runUpd(){if(SYNC){setTimeout(runUpd,15000);return}try{sessionStorage.setItem('iv_upd_at',Date.now())}catch{}location.replace(location.pathname+'?u='+Date.now())}
 function applyUpd(fast){let last=0;try{last=+sessionStorage.getItem('iv_upd_at')||0}catch{}const loop=Date.now()-last<120000;
